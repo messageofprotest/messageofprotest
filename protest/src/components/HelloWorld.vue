@@ -99,7 +99,7 @@ export default {
       if(this.location == "") {
         return; 
       }
-
+      
       let apiUrl =
         "https://www.googleapis.com/civicinfo/v2/" +
         "representatives" +
@@ -126,7 +126,7 @@ export default {
   },
   data: () => ({
     location: "",
-    apiKey: "",
+    apiKey: process.env.VUE_APP_API_KEY,
     representatives: {},
     dialog: false
   })
