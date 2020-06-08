@@ -8,7 +8,6 @@
 
 <script>
 import HelloWorld from './components/HelloWorld';
-// import Protest from './components/Protest';
 
 export default {
   name: 'App',

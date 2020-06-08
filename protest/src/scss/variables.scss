@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:100,300,400,500,700,900');
+
+$heading-font-family: 'Montserrat';
+$body-font-family: 'Source+Sans+Pro';
+
+// Required for modifying core defaults
+@import '~vuetify/src/styles/styles.sass';
