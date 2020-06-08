@@ -23,7 +23,7 @@
             class="mr-4 submit-button black--text"
             large
             color="white"
-            @click="getRepresentatives"
+            @click="populateRepresentatives"
           >Find Your Representatives</v-btn>
         </v-form>
 
@@ -41,47 +41,24 @@
 
             <p>{{ rep.emails ? rep.emails[0] : '' }}</p>
 
-            <v-dialog
-              v-model="dialog"
-              width="500"
-            >
+            <v-dialog v-model="dialog" width="500">
               <template v-slot:activator="{ on }">
-                <v-btn
-                  outlined 
-                  color="#ffffffc8"
-                  dark
-                  v-on="on"
-                >
-                  Contact
-                </v-btn>
+                <v-btn outlined color="#ffffffc8" dark v-on="on">Contact</v-btn>
               </template>
 
               <v-card>
-                <v-card-title
-                  class="headline"
-                  primary-title
-                >
-                  Privacy Policy
-                </v-card-title>
+                <v-card-title class="headline" primary-title>Privacy Policy</v-card-title>
 
-                <v-card-text>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </v-card-text>
+                <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</v-card-text>
 
                 <v-divider></v-divider>
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn
-                    color="primary"
-                    text
-                    @click="dialog = false"
-                  >
-                    I accept
-                  </v-btn>
+                  <v-btn color="primary" text @click="dialog = false">I accept</v-btn>
                 </v-card-actions>
               </v-card>
-            </v-dialog>           
+            </v-dialog>
           </v-card-text>
         </v-card>
       </v-col>
@@ -90,43 +67,17 @@
 </template>
 
 <script>
-const axios = require("axios");
+import { getRepresentatives } from "../endpoints";
 
 export default {
   name: "HelloWorld",
   methods: {
-    getRepresentatives: async function() {
-      if(this.location == "") {
-        return; 
-      }
-      
-      let apiUrl =
-        "https://www.googleapis.com/civicinfo/v2/" +
-        "representatives" +
-        "?key=" +
-        this.apiKey +
-        "&address=" +
-        this.location;
-
-      let res = await axios.get(apiUrl);
-
-      let officials = res.data.officials;
-      let offices = res.data.offices;
-
-      for (const office of offices) {
-        for (const index of office.officialIndices) {
-          officials[index].officeName = office.name;
-        }
-      }
-
-      let withEmail = officials.filter(e => e.emails);
-      let withoutEmail = officials.filter(e => !e.emails);
-      this.representatives = withEmail.concat(withoutEmail);
+    populateRepresentatives: async function() {
+      this.representatives = await getRepresentatives(this.location);
     }
   },
   data: () => ({
     location: "",
-    apiKey: process.env.VUE_APP_API_KEY,
     representatives: {},
     dialog: false
   })
