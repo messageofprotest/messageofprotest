@@ -96,7 +96,10 @@ export default {
   name: "HelloWorld",
   methods: {
     getRepresentatives: async function() {
-      console.log("GETTING REPS");
+      if(this.location == "") {
+        return; 
+      }
+
       let apiUrl =
         "https://www.googleapis.com/civicinfo/v2/" +
         "representatives" +
