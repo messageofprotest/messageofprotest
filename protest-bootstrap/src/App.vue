@@ -35,7 +35,7 @@
         </b-form>
       </b-container>
     </div>
-    <b-container v-if="searched">
+    <b-container v-if="this.representatives && Object.keys(this.representatives).length > 0">
       <hr class="top-hr">
       <div
         v-for="rep in representatives"
@@ -79,14 +79,12 @@ export default {
   name: "App",
   methods: {
     populateRepresentatives: async function() {
-      this.searched = true;
       this.representatives = await getRepresentatives(this.zipcode);
     }
   },
   data: () => ({
     zipcode: "",
-    representatives: {},
-    searched: false
+    representatives: {}
   })
 };
 </script>
