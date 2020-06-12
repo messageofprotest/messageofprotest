@@ -7,10 +7,11 @@
           class="subtitle"
         >Contact your representatives and demand evidence-based change for police reform*</p>
 
+        <!-- Input and Button -->
         <b-form class="form" @submit.prevent="populateRepresentatives">
           <b-container>
             <b-row class="justify-content-center">
-              <b-col cols="12" md="6">
+              <b-col cols="12" sm="6">
                 <b-form-group label-for="input-1">
                   <b-form-input
                     id="input-1"
@@ -36,25 +37,34 @@
         </b-form>
       </b-container>
     </div>
+
+    <!-- Where reps pulled from google civics api will show -->
     <b-container v-if="!_.isEmpty(this.representatives)">
       <div
         v-for="rep in representatives"
         :key="rep.name"
       >
-        <b-row class="rep-row">
-          <b-col cols="7" class="rep-text">
-            <h4>{{ rep.name }}</h4>
-            <h5>{{ rep.officeName }}</h5>
-            <h6>{{ rep.emails ? rep.emails[0] : null }}</h6>
-          </b-col>
-          <b-col cols="5" class="rep-contact">
-            <b-button v-b-modal.contact-modal variant="light" @click="clickedContact(rep)">
-              Contact
-            </b-button>
+        <b-row class="rep-row" align-h="center">
+          <b-col cols="12" sm="8" md="6" class="rep-container">
+              <b-row align-v="center">
+                <b-col cols="12" sm="6" class="rep-text">
+                    <h4>{{ rep.name }}</h4>
+                    <h5>{{ rep.officeName }}</h5>
+                    <h6>{{ rep.emails ? rep.emails[0] : null }}</h6>
+                </b-col>
+                <b-col cols="0" sm="1"></b-col>
+                <b-col cols="12" sm="5" class="rep-contact">
+                    <b-button class="contact-button" v-b-modal.contact-modal variant="light" @click="clickedContact(rep)">
+                    Contact
+                    </b-button>
+                </b-col>
+              </b-row>
           </b-col>
         </b-row>
       </div>
     </b-container>
+
+    <!-- Footer -->
     <b-container class="footer-section">
       <h1 class="section-header">Data & Attributions</h1>
       <h4>Data for this website comes from Campaign Zero.</h4>
@@ -69,6 +79,7 @@
       <p class="footer-text">Made in Washington, D.C. by @jayprat95, @slurpee123abc, and @smitto</p>
     </b-container>
 
+    <!-- Contact Modal -->
     <b-modal id="contact-modal" v-bind:title="'Contact ' + selectedRepresentative.name" hide-footer>
       <form v-if="selectedRepresentative.emails" v-bind:action="'mailto:' + selectedRepresentative.emails ? selectedRepresentative.emails[0] : null" method="GET">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac orci phasellus egestas tellus. Commodo odio aenean sed adipiscing diam donec adipiscing. Egestas maecenas pharetra convallis posuere morbi leo urna molestie. Turpis nunc eget lorem dolor. Massa tincidunt nunc pulvinar sapien et. Massa enim nec dui nunc. Turpis nunc eget lorem dolor sed viverra ipsum nunc aliquet. Scelerisque eu ultrices vitae auctor eu augue ut. Duis convallis convallis tellus id interdum velit. Eget sit amet tellus cras adipiscing enim eu turpis egestas. Posuere ac ut consequat semper viverra nam. Eget est lorem ipsum dolor sit amet consectetur adipiscing elit. Sed euismod nisi porta lorem mollis aliquam ut. Non pulvinar neque laoreet suspendisse interdum consectetur libero id. Nibh mauris cursus mattis molestie a iaculis at erat pellentesque. Tellus rutrum tellus pellentesque eu tincidunt. Mollis nunc sed id semper risus in. Consequat id porta nibh venenatis cras sed felis eget velit.
@@ -80,6 +91,7 @@
     </b-modal>
   </div>
 </template>
+
 
 <script>
 import { getRepresentatives } from "./endpoints";
@@ -105,6 +117,7 @@ export default {
   })
 };
 </script>
+
 
 <style lang="scss">
 @import 'bootstrap';
@@ -213,23 +226,34 @@ hr {
 
 .modal-dialog {
   position: relative;
-  top: 25%;
+  top: 25
 }
 
-.rep-contact {
-  text-align: left;
-  display: flex;
-  align-items: center;
-}
+
+// .rep-contact {
+//   text-align: left;
+//   display: flex;
+//   align-items: center;
+// }
 
 .rep-row {
-  margin: 25px auto;
 }
 
-.rep-text {
-  text-align: right !important;
-  padding-right: 20px;
+.rep-container {
+    padding-bottom: 20px;
+    padding-top: 25px;
+    border-bottom: 1px solid #ffffff94
 }
+
+.contact-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+// .rep-text {
+//   text-align: right !important;
+//   padding-right: 20px;
+// }
 
 .section-header {
   margin-top: 20px;
