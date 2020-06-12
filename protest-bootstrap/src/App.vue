@@ -35,7 +35,7 @@
         </b-form>
       </b-container>
     </div>
-    <b-container class="top-border" v-if="this.representatives && Object.keys(this.representatives).length > 0">
+    <b-container class="top-border" v-if="!_.isEmpty(this.representatives)">
       <div
         v-for="rep in representatives"
         :key="rep.name"
