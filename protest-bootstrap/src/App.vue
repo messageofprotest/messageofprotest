@@ -141,8 +141,8 @@ h1 {
   margin: 0 auto;
   overflow: auto;
   background-image: url("../public/background.jpg");
-  background-position: center -100px;
-  background-size: 100% 
+  background-position: center center;
+  background-size: cover;
 }
 
 .header-text {
