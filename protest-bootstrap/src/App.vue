@@ -140,9 +140,23 @@ h1 {
   width: 100%;
   margin: 0 auto;
   overflow: auto;
+}
+
+// insert the background image as a pseudoelement, we can
+// no control its opacity separately from the other contect
+// inside the .header div
+.header::after {
+  content: "";
   background-image: url("../public/background.jpg");
   background-position: center center;
   background-size: cover;
+  opacity: 0.55;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
 
 .header-text {
