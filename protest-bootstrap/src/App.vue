@@ -45,7 +45,7 @@
         :key="rep.name"
       >
         <b-row class="rep-row" align-h="center">
-          <b-col cols="12" sm="8" md="6" class="rep-container">
+          <b-col cols="12" sm="10" md="8" lg="6" class="rep-container">
               <b-row align-v="center">
                 <b-col cols="12" sm="6" class="rep-text">
                     <h4>{{ rep.name }}</h4>
@@ -248,6 +248,7 @@ hr {
 .contact-button {
     margin-top: 10px;
     margin-bottom: 10px;
+    font-weight: 600;
 }
 
 // .rep-text {
