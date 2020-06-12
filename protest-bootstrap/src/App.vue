@@ -7,7 +7,7 @@
           class="subtitle"
         >Contact your representatives and demand evidence-based change for police reform*</p>
 
-        <b-form class="form">
+        <b-form class="form" @submit.prevent="populateRepresentatives">
           <b-container>
             <b-row class="justify-content-center">
               <b-col cols="6">
@@ -26,7 +26,7 @@
                     variant="light"
                     class="button-main"
                     size="lg"
-                    @click="populateRepresentatives"
+                    type="submit"
                   >Find Your Representatives</b-button>
                 </b-form-group>
               </b-col>
