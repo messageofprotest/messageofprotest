@@ -35,8 +35,7 @@
         </b-form>
       </b-container>
     </div>
-    <b-container v-if="this.representatives && Object.keys(this.representatives).length > 0">
-      <hr class="top-hr">
+    <b-container class="top-border" v-if="this.representatives && Object.keys(this.representatives).length > 0">
       <div
         v-for="rep in representatives"
         :key="rep.name"
@@ -45,17 +44,17 @@
           <b-col cols="7" class="rep-text">
             <h4>{{ rep.name }}</h4>
             <h5>{{ rep.officeName }}</h5>
+            <h6>{{ rep.emails ? rep.emails[0] : null }}</h6>
           </b-col>
           <b-col cols="5" class="rep-contact">
-            <b-button variant="light">
+            <b-button v-b-modal.contact-modal variant="light" @click="clickedContact(rep)">
               Contact
             </b-button>
           </b-col>
         </b-row>
       </div>
     </b-container>
-    <b-container>
-      <hr class="top-hr">
+    <b-container class="top-border footer-section">
       <h1 class="section-header">Data & Attributions</h1>
       <h4>Data for this website comes from Campaign Zero.</h4>
       <b-button
@@ -64,11 +63,20 @@
         size="lg"
       >Support Campaign Zero</b-button>
     </b-container>
-    <b-container>
-      <hr>
-      <p class="footer">Black Lives Matter.</p>
-      <p class="footer">Made in Washington, D.C. by @jayprat95, @slurpee123abc, and @smitto</p>
+    <b-container class="top-border footer-section">
+      <p class="footer-text">Black Lives Matter.</p>
+      <p class="footer-text">Made in Washington, D.C. by @jayprat95, @slurpee123abc, and @smitto</p>
     </b-container>
+
+    <b-modal id="contact-modal" v-bind:title="'Contact ' + selectedRepresentative.name" hide-footer>
+      <form v-if="selectedRepresentative.emails" v-bind:action="'mailto:' + selectedRepresentative.emails ? selectedRepresentative.emails[0] : null" method="GET">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac orci phasellus egestas tellus. Commodo odio aenean sed adipiscing diam donec adipiscing. Egestas maecenas pharetra convallis posuere morbi leo urna molestie. Turpis nunc eget lorem dolor. Massa tincidunt nunc pulvinar sapien et. Massa enim nec dui nunc. Turpis nunc eget lorem dolor sed viverra ipsum nunc aliquet. Scelerisque eu ultrices vitae auctor eu augue ut. Duis convallis convallis tellus id interdum velit. Eget sit amet tellus cras adipiscing enim eu turpis egestas. Posuere ac ut consequat semper viverra nam. Eget est lorem ipsum dolor sit amet consectetur adipiscing elit. Sed euismod nisi porta lorem mollis aliquam ut. Non pulvinar neque laoreet suspendisse interdum consectetur libero id. Nibh mauris cursus mattis molestie a iaculis at erat pellentesque. Tellus rutrum tellus pellentesque eu tincidunt. Mollis nunc sed id semper risus in. Consequat id porta nibh venenatis cras sed felis eget velit.
+        <div class="m-footer">
+          <b-button type="submit" class="modal-button"><b-icon icon="envelope"></b-icon></b-button>
+          <b-button v-if="selectedRepresentative.phones" class="modal-button"><b-icon icon="phone"></b-icon> {{ selectedRepresentative.phones ? selectedRepresentative.phones[0] : "" }}</b-button>
+        </div>
+      </form>
+    </b-modal>
   </div>
 </template>
 
@@ -80,11 +88,15 @@ export default {
   methods: {
     populateRepresentatives: async function() {
       this.representatives = await getRepresentatives(this.zipcode);
+    },
+    clickedContact: function(rep) {
+      this.selectedRepresentative = rep;
     }
   },
   data: () => ({
     zipcode: "",
-    representatives: {}
+    representatives: {},
+    selectedRepresentative: { name: 'Placeholder', emails: [], phones: [] }
   })
 };
 </script>
@@ -110,7 +122,11 @@ body {
   margin: 20px 0px;
 }
 
-.footer {
+.footer-section {
+  margin-bottom: 15px;
+}
+
+.footer-text {
   text-align: left !important;
   margin-bottom: 5px;
 }
@@ -137,8 +153,41 @@ hr {
   height: 2px;
   background-color: white;
   margin-top: 20px;
-  margin-left: -50vw;
-  width: 150vw;
+}
+
+#contact-modal {
+  color: black;
+}
+
+.m-footer {
+  text-align: left;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #dee2e6;
+}
+
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) { 
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-button {
+  float: left;
+  margin-right: 10px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
 }
 
 .rep-contact {
@@ -164,6 +213,11 @@ hr {
   font-size: 23px;
   margin-top: 25px;
   color: #fdfdfd;
+}
+
+.top-border {
+  border-top: 2px solid white;
+  padding-top: 15px;
 }
 
 .top-hr {
