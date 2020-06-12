@@ -166,28 +166,14 @@ hr {
   border-top: 1px solid #dee2e6;
 }
 
-.modal {
-  text-align: center;
-}
-
-@media screen and (min-width: 768px) { 
-  .modal:before {
-    display: inline-block;
-    vertical-align: middle;
-    content: " ";
-    height: 100%;
-  }
-}
-
 .modal-button {
   float: left;
   margin-right: 10px;
 }
 
 .modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
+  position: relative;
+  top: 25%;
 }
 
 .rep-contact {
