@@ -55,7 +55,7 @@
         </b-row>
       </div>
     </b-container>
-    <b-container class="top-border footer-section">
+    <b-container class="footer-section">
       <h1 class="section-header">Data & Attributions</h1>
       <h4>Data for this website comes from Campaign Zero.</h4>
       <b-button
