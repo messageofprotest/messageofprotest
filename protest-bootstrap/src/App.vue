@@ -122,6 +122,14 @@ body {
   margin: 20px 0px;
 }
 
+// alternate .button-main styling
+// .button-main {
+//     outline: 2px solid white;
+//     background-color: black;
+//     color: WHITE;
+//     margin-top: 35px;
+// }
+
 .footer-section {
   margin-bottom: 15px;
 }
