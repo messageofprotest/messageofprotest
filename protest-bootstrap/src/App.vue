@@ -1,7 +1,7 @@
 <template>
   <div id="app" variant="dark">
     <div class="header">
-      <b-container class="header-text">
+      <b-container class="header-container" >
         <h1>Frustrated with the status quo on police brutality?</h1>
         <p
           class="subtitle"
@@ -10,10 +10,11 @@
         <b-form class="form" @submit.prevent="populateRepresentatives">
           <b-container>
             <b-row class="justify-content-center">
-              <b-col cols="6">
+              <b-col cols="12" md="6">
                 <b-form-group label-for="input-1">
                   <b-form-input
                     id="input-1"
+                    ref="zipcode"
                     aria-describedby="Enter zipcode."
                     class="zipcode-input"
                     v-model="zipcode"
@@ -35,7 +36,7 @@
         </b-form>
       </b-container>
     </div>
-    <b-container class="top-border" v-if="!_.isEmpty(this.representatives)">
+    <b-container v-if="!_.isEmpty(this.representatives)">
       <div
         v-for="rep in representatives"
         :key="rep.name"
@@ -85,6 +86,10 @@ import { getRepresentatives } from "./endpoints";
 
 export default {
   name: "App",
+  mounted() {
+    // focus input on page load, helpful for usability and screenreaders
+    this.$refs.zipcode.$el.focus();
+  },
   methods: {
     populateRepresentatives: async function() {
       this.representatives = await getRepresentatives(this.zipcode);
@@ -102,6 +107,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import 'bootstrap';
+
 * {
   border-radius: 0 !important;
 }
@@ -119,7 +126,8 @@ body {
 }
 
 .button-main {
-  margin: 20px 0px;
+  margin: 30px 0px;
+  font-weight: 500;
 }
 
 // alternate .button-main styling
@@ -148,6 +156,9 @@ h1 {
   width: 100%;
   margin: 0 auto;
   overflow: auto;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  border-bottom: 2px solid white;
 }
 
 // insert the background image as a pseudoelement, we can
@@ -157,8 +168,8 @@ h1 {
   content: "";
   background-image: url("../public/background.jpg");
   background-position: center center;
-  background-size: cover;
-  opacity: 0.55;
+//   background-size: cover;
+  opacity: 0.40;
   top: 0;
   left: 0;
   bottom: 0;
@@ -167,8 +178,15 @@ h1 {
   z-index: -1;   
 }
 
-.header-text {
+.header-container {
   margin: 100px auto 50px auto;
+}
+
+// make spacing at top of page smaller on mobile
+@include media-breakpoint-down(sm) {
+    .header-container {
+        margin-top: 30px;
+    }
 }
 
 hr {
@@ -232,18 +250,46 @@ hr {
   margin-top: 0px !important;
 }
 
+// old input style
+// .zipcode-input,
+// .zipcode-input:focus {
+//   background-color: white;
+//   caret-color: #d0d0d0;
+//   color: black;
+//   height: 50px;
+//   font-size: 24px;
+//   margin-top: 20px;
+//   border: 0;
+// }
+
 .zipcode-input,
 .zipcode-input:focus {
-  background-color: white;
-  caret-color: #d0d0d0;
-  color: black;
-  height: 50px;
-  font-size: 24px;
-  margin-top: 20px;
-  border: 0;
+    caret-color: #d0d0d0;
+    height: 50px;
+    font-size: 24px;
+    margin-top: 20px;
+    border: 0;
+    color: white;
+    background-color: #00000030;
+    outline: 2px solid white;
 }
 
+// changes blue focus outline around input to gray inputg
+// .zipcode-input:focus {
+//     box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5);
+// }
+
 .zipcode-input::placeholder {
-  color: #969696;
+  color: #d2d2d2;
 }
+
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+// old input placeholder color
+// .zipcode-input::placeholder {
+//   color: #969696;
+// }
+
 </style>
