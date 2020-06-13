@@ -141,7 +141,7 @@ body {
 
 .button-main {
   margin: 30px 0px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 // alternate .button-main styling
@@ -294,6 +294,7 @@ hr {
     caret-color: #d0d0d0;
     height: 50px;
     font-size: 24px;
+    font-weight: 600;
     margin-top: 20px;
     border: 0;
     color: white;
