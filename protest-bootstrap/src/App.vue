@@ -44,7 +44,7 @@
         v-for="rep in representatives"
         :key="rep.name"
       >
-        <b-row class="rep-row" align-h="center">
+        <b-row align-h="center">
           <b-col cols="12" sm="10" md="8" lg="6" class="rep-container">
               <b-row align-v="center">
                 <b-col cols="12" sm="6" class="rep-text">
@@ -65,19 +65,20 @@
     </b-container>
 
     <!-- Footer -->
-    <b-container class="footer-section">
+    <b-container class="section">
       <h1 class="section-header">Data & Attributions</h1>
       <h4>Data for this website comes from Campaign Zero.</h4>
       <b-button
+        href="https://www.joincampaignzero.org/"
         variant="light"
         class="button-main"
         size="lg"
       >Support Campaign Zero</b-button>
     </b-container>
-    <b-container class="top-border footer-section">
+    <div class="top-border section footer-section">
       <p class="footer-text">Black Lives Matter.</p>
       <p class="footer-text">Made in Washington, D.C. by @jayprat95, @slurpee123abc, and @smitto</p>
-    </b-container>
+    </div>
 
     <!-- Contact Modal -->
     <b-modal id="contact-modal" v-bind:title="'Contact ' + selectedRepresentative.name" hide-footer>
@@ -124,6 +125,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Source+Sans+Pro:wght@300&display=swap');
 
 * {
+  font-family: 'Source Sans Pro', sans-serif;
   border-radius: 0 !important;
 }
 
@@ -144,6 +146,16 @@ body {
   font-weight: 600;
 }
 
+.contact-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+#contact-modal {
+  color: black;
+}
+
 // alternate .button-main styling
 // .button-main {
 //     outline: 2px solid white;
@@ -153,7 +165,7 @@ body {
 // }
 
 .footer-section {
-  margin-bottom: 15px;
+  padding: 0 20px;
 }
 
 .footer-text {
@@ -210,10 +222,6 @@ hr {
   margin-top: 20px;
 }
 
-#contact-modal {
-  color: black;
-}
-
 .m-footer {
   text-align: left;
   margin-top: 1rem;
@@ -238,25 +246,20 @@ hr {
 //   align-items: center;
 // }
 
-.rep-row {
-}
-
 .rep-container {
     padding-bottom: 20px;
     padding-top: 25px;
     border-bottom: 1px solid #ffffff94
 }
 
-.contact-button {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
 // .rep-text {
 //   text-align: right !important;
 //   padding-right: 20px;
 // }
+
+.section {
+  margin-bottom: 15px;
+}
 
 .section-header {
   margin-top: 20px;
@@ -302,17 +305,8 @@ hr {
     outline: 2px solid white;
 }
 
-// changes blue focus outline around input to gray inputg
-// .zipcode-input:focus {
-//     box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5);
-// }
-
 .zipcode-input::placeholder {
   color: #d2d2d2;
-}
-
-* {
-    font-family: 'Source Sans Pro', sans-serif;
 }
 
 // old input placeholder color
