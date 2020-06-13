@@ -67,7 +67,8 @@
     <!-- Footer -->
     <b-container class="section">
       <h1 class="section-header">Data & Attributions</h1>
-      <h4>Data for this website comes from Campaign Zero.</h4>
+      <h4>Representative contact information comes from the <a href="https://developers.google.com/civic-information">Google Civic Information API. </a> Sources 
+      for the data in the email come from <a href="https://www.joincampaignzero.org"> Campaign Zero.</a> </h4>
       <b-button
         href="https://www.joincampaignzero.org/"
         variant="light"
@@ -204,8 +205,8 @@ h1 {
   content: "";
   background-image: url("../public/background.jpg");
   background-position: center center;
-//   background-size: cover;
-  opacity: 0.40;
+  background-size: cover;
+  opacity: 0.20;
   top: 0;
   left: 0;
   bottom: 0;
