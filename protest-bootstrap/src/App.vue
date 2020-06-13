@@ -48,7 +48,7 @@
           <b-col cols="12" sm="10" md="8" lg="6" class="rep-container">
               <b-row align-v="center">
                 <b-col cols="12" sm="6" class="rep-text">
-                    <h4>{{ rep.name }}</h4>
+                    <h4 class="rep-name">{{ rep.name }}</h4>
                     <h5>{{ rep.officeName }}</h5>
                     <h6>{{ rep.emails ? rep.emails[0] : null }}</h6>
                 </b-col>
@@ -224,6 +224,10 @@ h1 {
     .header-container {
         margin-top: 30px;
     }
+}
+
+.rep-name {
+    font-weight: 600;
 }
 
 hr {
