@@ -23,6 +23,7 @@
                     required
                     placeholder="Enter zipcode"
                     variant="dark"
+                    autocomplete="postal-code"
                   ></b-form-input>
                   <b-button 
                     variant="light"
