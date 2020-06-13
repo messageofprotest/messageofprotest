@@ -121,6 +121,7 @@ export default {
 
 <style lang="scss">
 @import 'bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Source+Sans+Pro:wght@300&display=swap');
 
 * {
   border-radius: 0 !important;
@@ -162,6 +163,7 @@ body {
 
 h1 {
   font-size: 3rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .header {
