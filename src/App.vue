@@ -109,6 +109,7 @@ export default {
   },
   methods: {
     populateRepresentatives: async function() {
+      this.$ga.event('contact', 'click', 'clicked contact')
       this.representatives = await getRepresentatives(this.zipcode);
     },
     clickedContact: function(rep) {
