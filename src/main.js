@@ -12,7 +12,7 @@ Vue.use(BootstrapVueIcons)
 Vue.config.productionTip = false
 
 Vue.use(VueAnalytics, {
-  id: 'UA-XXX-X'
+  id: 'UA-169344376-1'
 })
 
 // support lodash functions in all components

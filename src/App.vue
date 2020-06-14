@@ -5,7 +5,7 @@
         <h1>Frustrated with the status quo on police brutality?</h1>
         <p
           class="subtitle"
-        >Contact your representatives and demand evidence-based change for police reform*</p>
+        >Contact your representatives and demand evidence-based change for police reform</p>
 
         <!-- Input and Button -->
         <b-form class="form" @submit.prevent="populateRepresentatives">
@@ -41,7 +41,7 @@
 
     <!-- Where reps pulled from google civics api will show -->
     <b-container v-if="!_.isEmpty(this.representatives)">
-      <h1 class="section-header">Representatives</h1>
+      <h1>Representatives</h1>
       <div
         v-for="rep in representatives"
         :key="rep.name"
