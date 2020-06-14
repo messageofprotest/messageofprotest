@@ -2,7 +2,7 @@
   <div id="app" variant="dark">
     <div class="header">
       <b-container class="header-container" >
-        <h1>Frustrated with the status quo on police brutality?</h1>
+        <h1>Together we can end police violence in America</h1>
         <p
           class="subtitle"
         >Contact your representatives and demand evidence-based change for police reform</p>
@@ -67,11 +67,11 @@
     </b-container>
 
     <!-- Footer -->
-    <div v-bind:class="{ 'top-border': !_.isEmpty(this.representatives) }" class="section">
+    <div v-bind:class="{ 'top-border': !_.isEmpty(this.representatives) }" class="section footer-section">
       <h2 class="section-header">Data & Attributions</h2>
-      <h5>Representative contact information comes from the <a href="https://developers.google.com/civic-information">Google Civic Information API. </a> <br> Sources 
-      for the data in the email come from <a href="https://www.joincampaignzero.org"> Campaign Zero.</a> <br> 
-      Header image sourced from <a href="https://unsplash.com/@koshuuu"> Koshu Kunii via Unsplash. </a> 
+      <h5>Representative contact information comes from the <a href="https://developers.google.com/civic-information">Google Civic Information API.</a><br>
+        Sources for the data in the email come from <a href="https://www.joincampaignzero.org">Campaign Zero.</a><br> 
+        Header image sourced from <a href="https://unsplash.com/@koshuuu">Koshu Kunii via Unsplash.</a> 
       </h5>
       <b-button
         href="https://www.joincampaignzero.org/"
@@ -89,9 +89,9 @@
     <b-modal id="contact-modal" v-bind:title="'Contact ' + selectedRepresentative.name" hide-footer>
       <div id="email-body">{{ emailBody }}</div>
       <div class="m-footer">
-        <b-button v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody" v-if="selectedRepresentative.emails" type="submit" class="modal-button"><b-icon icon="envelope"></b-icon></b-button>
-        <b-button class="modal-button" @click="copyToClipboard"><b-icon icon="paperclip"></b-icon></b-button>
+        <b-button v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody" v-if="selectedRepresentative.emails" type="submit" class="modal-button"><b-icon icon="envelope"></b-icon> Email</b-button>
         <b-button v-if="selectedRepresentative.phones" class="modal-button"><b-icon icon="phone"></b-icon> {{ selectedRepresentative.phones[0] }}</b-button>
+        <b-button class="modal-button" @click="copyToClipboard"><b-icon icon="paperclip"></b-icon></b-button>
       </div>
     </b-modal>
   </div>
@@ -174,14 +174,6 @@ body {
   color: black;
 }
 
-// alternate .button-main styling
-// .button-main {
-//     outline: 2px solid white;
-//     background-color: black;
-//     color: WHITE;
-//     margin-top: 35px;
-// }
-
 .footer-section {
   padding: 0 20px;
 }
@@ -201,11 +193,16 @@ h2 {
   font-family: 'Montserrat', sans-serif;
 }
 
+@include media-breakpoint-down(xs) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
 .header {
   position: relative;
   width: 100%;
   margin: 0 auto;
-  margin-bottom: 20px;
   overflow: auto;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
@@ -233,11 +230,12 @@ h2 {
   margin: 100px auto 50px auto;
 }
 
-// make spacing at top of page smaller on mobile
+// make header spacing smaller on mobile
 @include media-breakpoint-down(sm) {
-    .header-container {
-        margin-top: 30px;
-    }
+  .header-container {
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
 }
 
 .rep-name {
@@ -262,11 +260,6 @@ hr {
   margin-right: 10px;
 }
 
-.modal-dialog {
-  position: relative;
-  top: 25
-}
-
 .rep-container {
   padding-bottom: 20px;
   padding-top: 25px;
@@ -278,7 +271,7 @@ hr {
 }
 
 .section {
-  margin-bottom: 15px;
+  padding: 15px 15px;
 }
 
 .section-header {
@@ -300,18 +293,6 @@ hr {
   margin-top: 0px !important;
 }
 
-// old input style
-// .zipcode-input,
-// .zipcode-input:focus {
-//   background-color: white;
-//   caret-color: #d0d0d0;
-//   color: black;
-//   height: 50px;
-//   font-size: 24px;
-//   margin-top: 20px;
-//   border: 0;
-// }
-
 .zipcode-input,
 .zipcode-input:focus {
     caret-color: #d0d0d0;
@@ -328,10 +309,5 @@ hr {
 .zipcode-input::placeholder {
   color: #d2d2d2;
 }
-
-// old input placeholder color
-// .zipcode-input::placeholder {
-//   color: #969696;
-// }
 
 </style>
