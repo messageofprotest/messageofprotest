@@ -41,6 +41,7 @@
 
     <!-- Where reps pulled from google civics api will show -->
     <b-container v-if="!_.isEmpty(this.representatives)">
+      <h1 class="section-header">Representatives</h1>
       <div
         v-for="rep in representatives"
         :key="rep.name"
@@ -68,8 +69,10 @@
     <!-- Footer -->
     <b-container class="section">
       <h1 class="section-header">Data & Attributions</h1>
-      <h4>Representative contact information comes from the <a href="https://developers.google.com/civic-information">Google Civic Information API. </a> Sources 
-      for the data in the email come from <a href="https://www.joincampaignzero.org"> Campaign Zero.</a> </h4>
+      <h4>Representative contact information comes from the <a href="https://developers.google.com/civic-information">Google Civic Information API. </a> <br> Sources 
+      for the data in the email come from <a href="https://www.joincampaignzero.org"> Campaign Zero.</a> <br> 
+      Header image sourced from <a href="https://unsplash.com/@koshuuu"> Koshu Kunii via Unsplash. </a> 
+      </h4>
       <b-button
         href="https://www.joincampaignzero.org/"
         variant="light"
