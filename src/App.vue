@@ -40,46 +40,46 @@
     </div>
 
     <!-- Where reps pulled from google civics api will show -->
-    <b-container v-if="!_.isEmpty(this.representatives)">
-      <h1>Representatives</h1>
+    <b-container class="section rep-section" v-if="!_.isEmpty(this.representatives)">
+      <h2 class="section-header">Representatives</h2>
       <div
         v-for="rep in representatives"
         :key="rep.name"
       >
         <b-row align-h="center">
           <b-col cols="12" sm="10" md="8" lg="6" class="rep-container">
-              <b-row align-v="center">
-                <b-col cols="12" sm="6" class="rep-text">
-                    <h4 class="rep-name">{{ rep.name }}</h4>
-                    <h5>{{ rep.officeName }}</h5>
-                    <h6>{{ rep.emails ? rep.emails[0] : null }}</h6>
-                </b-col>
-                <b-col cols="0" sm="1"></b-col>
-                <b-col cols="12" sm="5" class="rep-contact">
-                    <b-button class="contact-button" v-b-modal.contact-modal variant="light" @click="clickedContact(rep)">
-                    Contact
-                    </b-button>
-                </b-col>
-              </b-row>
+            <b-row align-v="center">
+              <b-col cols="12" sm="6">
+                  <h4 class="rep-name">{{ rep.name }}</h4>
+                  <h5>{{ rep.officeName }}</h5>
+                  <h6>{{ rep.emails ? rep.emails[0] : null }}</h6>
+              </b-col>
+              <b-col cols="0" sm="1"></b-col>
+              <b-col cols="12" sm="5">
+                  <b-button class="contact-button" v-b-modal.contact-modal variant="light" @click="clickedContact(rep)">
+                  Contact
+                  </b-button>
+              </b-col>
+            </b-row>
           </b-col>
         </b-row>
       </div>
     </b-container>
 
     <!-- Footer -->
-    <b-container class="section">
-      <h1 class="section-header">Data & Attributions</h1>
-      <h4>Representative contact information comes from the <a href="https://developers.google.com/civic-information">Google Civic Information API. </a> <br> Sources 
+    <div v-bind:class="{ 'top-border': !_.isEmpty(this.representatives) }" class="section">
+      <h2 class="section-header">Data & Attributions</h2>
+      <h5>Representative contact information comes from the <a href="https://developers.google.com/civic-information">Google Civic Information API. </a> <br> Sources 
       for the data in the email come from <a href="https://www.joincampaignzero.org"> Campaign Zero.</a> <br> 
       Header image sourced from <a href="https://unsplash.com/@koshuuu"> Koshu Kunii via Unsplash. </a> 
-      </h4>
+      </h5>
       <b-button
         href="https://www.joincampaignzero.org/"
         variant="light"
         class="button-main"
         size="lg"
       >Support Campaign Zero</b-button>
-    </b-container>
+    </div>
     <div class="top-border section footer-section">
       <p class="footer-text">Black Lives Matter.</p>
       <p class="footer-text">Made in Washington, D.C. by @jayprat95, @slurpee123abc, and @smitto</p>
@@ -193,6 +193,11 @@ h1 {
   font-family: 'Montserrat', sans-serif;
 }
 
+h2 {
+  font-size: 2.5rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .header {
   position: relative;
   width: 100%;
@@ -258,23 +263,15 @@ hr {
   top: 25
 }
 
-
-// .rep-contact {
-//   text-align: left;
-//   display: flex;
-//   align-items: center;
-// }
-
 .rep-container {
-    padding-bottom: 20px;
-    padding-top: 25px;
-    border-bottom: 1px solid #ffffff94
+  padding-bottom: 20px;
+  padding-top: 25px;
+  border-bottom: 1px solid #ffffff94;
 }
 
-// .rep-text {
-//   text-align: right !important;
-//   padding-right: 20px;
-// }
+.rep-section div:last-child > div.row > div.rep-container {
+  border-bottom: none;
+}
 
 .section {
   margin-bottom: 15px;
