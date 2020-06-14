@@ -50,15 +50,15 @@
           <b-col cols="12" sm="10" md="8" lg="6" class="rep-container">
             <b-row align-v="center">
               <b-col cols="12" sm="6">
-                  <h4 class="rep-name">{{ rep.name }}</h4>
-                  <h5>{{ rep.officeName }}</h5>
-                  <h6>{{ rep.emails ? rep.emails[0] : null }}</h6>
+                <h4 class="rep-name">{{ rep.name }}</h4>
+                <h5>{{ rep.officeName }}</h5>
+                <h6>{{ rep.emails ? rep.emails[0] : null }}</h6>
               </b-col>
               <b-col cols="0" sm="1"></b-col>
               <b-col cols="12" sm="5">
-                  <b-button class="contact-button" v-b-modal.contact-modal variant="light" @click="clickedContact(rep)">
+                <b-button class="contact-button" v-b-modal.contact-modal variant="light" @click="clickedContact(rep)">
                   Contact
-                  </b-button>
+                </b-button>
               </b-col>
             </b-row>
           </b-col>
@@ -67,7 +67,7 @@
     </b-container>
 
     <!-- Footer -->
-    <div v-bind:class="{ 'top-border': !_.isEmpty(this.representatives) }" class="section footer-section">
+    <div v-bind:class="{ 'top-border': !_.isEmpty(this.representatives) }" class="section">
       <h2 class="section-header">Data & Attributions</h2>
       <h5>Representative contact information comes from the <a href="https://developers.google.com/civic-information">Google Civic Information API.</a><br>
         Sources for the data in the email come from <a href="https://www.joincampaignzero.org">Campaign Zero.</a><br> 
@@ -80,7 +80,7 @@
         size="lg"
       >Support Campaign Zero</b-button>
     </div>
-    <div class="top-border section footer-section">
+    <div class="top-border section">
       <p class="footer-text">Black Lives Matter.</p>
       <p class="footer-text">Made in Washington, D.C. by @jayprat95, @slurpee123abc, and @smitto</p>
     </div>
@@ -165,17 +165,13 @@ body {
 }
 
 .contact-button {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 600;
 }
 
 #contact-modal {
   color: black;
-}
-
-.footer-section {
-  padding: 0 20px;
 }
 
 .footer-text {
@@ -260,6 +256,14 @@ hr {
   margin-right: 10px;
 }
 
+// make buttons smaller on mobile to fit on one line
+@include media-breakpoint-down(xs) {
+  .modal-button {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
 .rep-container {
   padding-bottom: 20px;
   padding-top: 25px;
@@ -295,15 +299,15 @@ hr {
 
 .zipcode-input,
 .zipcode-input:focus {
-    caret-color: #d0d0d0;
-    height: 50px;
-    font-size: 24px;
-    font-weight: 600;
-    margin-top: 20px;
-    border: 0;
-    color: white;
-    background-color: #00000030;
-    outline: 2px solid white;
+  caret-color: #d0d0d0;
+  height: 50px;
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 20px;
+  border: 0;
+  color: white;
+  background-color: #00000030;
+  outline: 2px solid white;
 }
 
 .zipcode-input::placeholder {
