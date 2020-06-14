@@ -200,6 +200,7 @@ h1 {
   position: relative;
   width: 100%;
   margin: 0 auto;
+  margin-bottom: 50px;
   overflow: auto;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
