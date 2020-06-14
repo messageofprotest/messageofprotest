@@ -100,6 +100,9 @@
 
 <script>
 import { getRepresentatives } from "./endpoints";
+import emailTemplate from './assets/email_template.json'; 
+
+console.log(emailTemplate); 
 
 export default {
   name: "App",
@@ -128,8 +131,8 @@ export default {
     zipcode: "",
     representatives: {},
     selectedRepresentative: { name: 'Placeholder', emails: [], phones: [] },
-    emailSubject: "Hey what's up",
-    emailBody: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ac orci phasellus egestas tellus. Commodo odio aenean sed adipiscing diam donec adipiscing. Egestas maecenas pharetra convallis posuere morbi leo urna molestie. Turpis nunc eget lorem dolor. Massa tincidunt nunc pulvinar sapien et. Massa enim nec dui nunc. Turpis nunc eget lorem dolor sed viverra ipsum nunc aliquet. Scelerisque eu ultrices vitae auctor eu augue ut. Duis convallis convallis tellus id interdum velit. Eget sit amet tellus cras adipiscing enim eu turpis egestas. Posuere ac ut consequat semper viverra nam. Eget est lorem ipsum dolor sit amet consectetur adipiscing elit. Sed euismod nisi porta lorem mollis aliquam ut. Non pulvinar neque laoreet suspendisse interdum consectetur libero id. Nibh mauris cursus mattis molestie a iaculis at erat pellentesque. Tellus rutrum tellus pellentesque eu tincidunt. Mollis nunc sed id semper risus in. Consequat id porta nibh venenatis cras sed felis eget velit."
+    emailSubject: emailTemplate.subject,
+    emailBody: emailTemplate.content
   })
 };
 </script>
@@ -202,6 +205,7 @@ h2 {
   position: relative;
   width: 100%;
   margin: 0 auto;
+  margin-bottom: 20px;
   overflow: auto;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
