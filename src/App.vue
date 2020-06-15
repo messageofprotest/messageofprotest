@@ -1,8 +1,7 @@
 <template>
   <div id="app" variant="dark">
     <div class="header">
-      <b-container class="header-container" >
-
+      <b-container class="header-container">
         <!-- Headers -->
         <h1>Together we can end police violence in America.</h1>
         <p
@@ -15,36 +14,33 @@
             <b-row class="justify-content-center">
               <b-col cols="12" sm="6">
                 <b-form-group label-for="input-1">
-
                   <div class="zipcode-input-container">
                     <b-form-input
-                        id="input-1"
-                        ref="zipcode"
-                        class="zipcode-input"
-                        :class="{'zipcode-input-error': zipcodeHasError}"
-                        v-model="zipcode"
-                        type="number"
-                        required
-                        placeholder="Enter zipcode"
-                        variant="dark"
-                        autocomplete="postal-code"
-                    >
-                    </b-form-input>
+                      id="input-1"
+                      ref="zipcode"
+                      class="zipcode-input"
+                      :class="{'zipcode-input-error': zipcodeHasError}"
+                      v-model="zipcode"
+                      type="number"
+                      required
+                      placeholder="Enter zipcode"
+                      variant="dark"
+                      autocomplete="postal-code"
+                    ></b-form-input>
                     <b-spinner class="zipcode-spinner" v-if="loading" label="Loading..."></b-spinner>
                   </div>
 
-                  <div class="zipcode-error" v-if="zipcodeHasError">
-                      This zipcode does not exist.  Try reentering your zipcode.
-                  </div>
+                  <div
+                    class="zipcode-error"
+                    v-if="zipcodeHasError"
+                  >This zipcode does not exist. Try reentering your zipcode.</div>
 
-                  <b-button 
+                  <b-button
                     variant="light"
                     class="button-main"
                     size="lg"
                     type="submit"
-                  >
-                    Find Your Representatives
-                  </b-button>
+                  >Find Your Representatives</b-button>
                 </b-form-group>
               </b-col>
             </b-row>
@@ -56,10 +52,7 @@
     <!-- Where reps pulled from google civics api will show -->
     <b-container class="section rep-section" v-if="!_.isEmpty(this.representatives)">
       <h2 class="section-header" id="reps-header">Representatives</h2>
-      <div
-        v-for="rep in representatives"
-        :key="rep.name"
-      >
+      <div v-for="rep in representatives" :key="rep.name">
         <b-row align-h="center">
           <b-col cols="12" sm="10" md="8" lg="6" class="rep-container">
             <b-row align-v="center">
@@ -70,9 +63,12 @@
               </b-col>
               <b-col cols="0" sm="1"></b-col>
               <b-col cols="12" sm="5">
-                <b-button class="contact-button" v-b-modal.contact-modal variant="light" @click="clickedContact(rep)">
-                  Contact
-                </b-button>
+                <b-button
+                  class="contact-button"
+                  v-b-modal.contact-modal
+                  variant="light"
+                  @click="clickedContact(rep)"
+                >Contact</b-button>
               </b-col>
             </b-row>
           </b-col>
@@ -83,9 +79,13 @@
     <!-- Footer -->
     <div v-bind:class="{ 'top-border': !_.isEmpty(this.representatives) }" class="section">
       <h2 class="section-header" id="attributions-header">Data & Attributions</h2>
-      <h5>Representative contact information sourced from the <a href="https://developers.google.com/civic-information">Google Civic Information API.</a><br>
-        Header image sourced from <a href="https://unsplash.com/@koshuuu">Koshu Kunii via Unsplash.</a><br>
-        Email details sourced from <a href="https://www.joincampaignzero.org">Campaign Zero.</a>
+      <h5>
+        Representative contact information sourced from the
+        <a href="https://developers.google.com/civic-information">Google Civic Information API.</a>
+        <br />Header image sourced from
+        <a href="https://unsplash.com/@koshuuu">Koshu Kunii via Unsplash.</a>
+        <br />Email details sourced from
+        <a href="https://www.joincampaignzero.org">Campaign Zero.</a>
       </h5>
       <b-button
         href="https://www.joincampaignzero.org/"
@@ -101,11 +101,42 @@
 
     <!-- Contact Modal -->
     <b-modal id="contact-modal" v-bind:title="'Contact ' + selectedRepresentative.name" hide-footer>
-      <div id="email-body">{{ copyBody }}</div>
+      <div id="email-body">
+        To whom it may concern, <br> <br>
+        I am a concerned representative in your district writing today to voice my support and encouragement for the continued improvement of policing in our jurisdiction. Over 1000 people are killed by police violence each year in America and we can effectively reduce this violence by implementing research-based policy solutions. 
+        <br> <br> 
+        These policies include: <br> 
+        - Increasing the use of Body Worn Cameras (BWCs) <br>
+        - Increasing (or introducing) de-escalation training for police officers <br>
+        - Ending broken windows & for profit policing <br>
+        - Limiting the use of force used by police officers <br> <br> 
+        Campaign Zero maintains an agenda of recommended policy based on research found here: (<a href="https://tinyurl.com/C0-Agenda">https://tinyurl.com/C0-Agenda</a>) <br> <br> 
+        As a taxpayer, I whole-heartedly support strengthening or introducing these policies in our jurisdiction. It’s clear that in the near future these sorts of training, as well as the use of BWCs will be the standard for all jurisdictions in our country. I hope our jurisdiction can lead out in determining best practices and policies for the safety of all in our community. 
+        <br> <br> 
+        Thank you in advance for your time and have a good day!
+
+
+      </div>
       <div class="m-footer">
-        <b-button v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody" v-if="selectedRepresentative.emails" type="submit" class="modal-button"><b-icon icon="envelope"></b-icon> Email</b-button>
-        <b-button v-bind:href="'tel:+' + selectedRepresentative.phones" v-if="selectedRepresentative.phones" class="modal-button"><b-icon icon="phone"></b-icon> {{ selectedRepresentative.phones[0] }}</b-button>
-        <b-button class="modal-button" @click="copyToClipboard"><b-icon icon="paperclip"></b-icon></b-button>
+        <b-button
+          v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody"
+          v-if="selectedRepresentative.emails"
+          type="submit"
+          class="modal-button"
+        >
+          <b-icon icon="envelope"></b-icon> Email
+        </b-button>
+        <b-button
+          v-bind:href="'tel:+' + selectedRepresentative.phones"
+          v-if="selectedRepresentative.phones"
+          class="modal-button"
+        >
+          <b-icon icon="phone"></b-icon>
+          {{ selectedRepresentative.phones[0] }}
+        </b-button>
+        <b-button class="modal-button" @click="copyToClipboard">
+          <b-icon icon="paperclip"></b-icon>
+        </b-button>
       </div>
     </b-modal>
   </div>
@@ -114,8 +145,8 @@
 
 <script>
 import { getRepresentatives } from "./endpoints";
-import emailTemplate from './assets/email_template.json'; 
-import VueScrollTo from 'vue-scrollto';
+import emailTemplate from "./assets/email_template.json";
+import VueScrollTo from "vue-scrollto";
 
 export default {
   name: "App",
@@ -125,26 +156,24 @@ export default {
   },
   methods: {
     handleFindRepresentatives: async function() {
-        // unfocus zipcode input after submission.  This will cause the software keyboard
-        // on mobile devices to collapse after clicking "Go".
-        this.$refs.zipcode.$el.blur();
-        this.$ga.event('contact', 'click', 'clicked find representatives')
-        
-        try {
-            this.loading = true;
-            this.representatives = await getRepresentatives(this.zipcode);
-            this.zipcodeHasError = false;
-            // once reps render (on next DOM cycle) scroll user to them
-            this.$nextTick(function () {
-                VueScrollTo.scrollTo('#reps-header');
-            })
-        }
-        catch {
-            this.representatives = {};
-            this.zipcodeHasError = true;
-        }
-        this.loading = false;
+      // unfocus zipcode input after submission.  This will cause the software keyboard
+      // on mobile devices to collapse after clicking "Go".
+      this.$refs.zipcode.$el.blur();
+      this.$ga.event("contact", "click", "clicked find representatives");
 
+      try {
+        this.loading = true;
+        this.representatives = await getRepresentatives(this.zipcode);
+        this.zipcodeHasError = false;
+        // once reps render (on next DOM cycle) scroll user to them
+        this.$nextTick(function() {
+          VueScrollTo.scrollTo("#reps-header");
+        });
+      } catch {
+        this.representatives = {};
+        this.zipcodeHasError = true;
+      }
+      this.loading = false;
     },
     clickedContact: function(rep) {
       this.selectedRepresentative = rep;
@@ -162,25 +191,27 @@ export default {
     zipcode: "",
     zipcodeHasError: false,
     representatives: {},
-    selectedRepresentative: { name: 'Placeholder', emails: [], phones: [] },
+    selectedRepresentative: { name: "Placeholder", emails: [], phones: [] },
     emailSubject: emailTemplate.subject,
     emailBody: emailTemplate.content,
     copyBody: decodeURIComponent(emailTemplate.content),
-    loading: false,
+    loading: false
   })
 };
 </script>
 
 
 <style lang="scss">
-@import 'bootstrap';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Source+Sans+Pro:wght@300&display=swap');
+@import "bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Source+Sans+Pro:wght@300&display=swap");
 
 * {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
-button, div, a {
+button,
+div,
+a {
   border-radius: 0 !important;
 }
 
@@ -218,12 +249,12 @@ body {
 
 h1 {
   font-size: 3rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 h2 {
   font-size: 2.5rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 @include media-breakpoint-down(xs) {
@@ -240,7 +271,7 @@ h2 {
   width: 100%;
   margin: 0 auto;
   overflow: auto;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 600;
   border-bottom: 2px solid white;
 }
@@ -253,13 +284,13 @@ h2 {
   background-image: url("../public/background.jpg");
   background-position: center center;
   background-size: cover;
-  opacity: 0.20;
+  opacity: 0.2;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   position: absolute;
-  z-index: -1;   
+  z-index: -1;
 }
 
 .header-container {
@@ -275,7 +306,7 @@ h2 {
 }
 
 .rep-name {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 hr {
@@ -349,7 +380,7 @@ hr {
   background-color: #00000030 !important;
   outline: 2px solid white;
 
-  padding-right:60px !important;
+  padding-right: 60px !important;
 }
 
 .zipcode-input::placeholder {
@@ -357,39 +388,39 @@ hr {
 }
 
 .zipcode-input-error {
-    outline: 2px solid #ffbebe;
+  outline: 2px solid #ffbebe;
 }
 
 .zipcode-input-container {
-    position: relative;
+  position: relative;
 }
 
 .zipcode-error {
-    margin-top: 10px;
-    color: #ffbebe;
+  margin-top: 10px;
+  color: #ffbebe;
 }
 
 .zipcode-spinner {
-    top: 9px;
-    right: 15px;
-    position: absolute;
-    border-width: 0.2rem;
+  top: 9px;
+  right: 15px;
+  position: absolute;
+  border-width: 0.2rem;
 }
 
 // hide up/down arrows on numbered inputs
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-input[type=number] {
-    -moz-appearance:textfield;
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 /* Change Autocomplete styles in Chrome*/
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 textarea:-webkit-autofill:hover,
@@ -400,5 +431,4 @@ select:-webkit-autofill:focus {
   -webkit-text-fill-color: white;
   -webkit-box-shadow: 0 0 0px 1000px #000 inset;
 }
-
 </style>
