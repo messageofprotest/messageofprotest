@@ -2,13 +2,15 @@
   <div id="app" variant="dark">
     <div class="header">
       <b-container class="header-container" >
+
+        <!-- Headers -->
         <h1>Together we can end police violence in America</h1>
         <p
           class="subtitle"
         >Contact your representatives and demand evidence-based change for police reform</p>
 
         <!-- Input and Button -->
-        <b-form class="form" @submit.prevent="populateRepresentatives">
+        <b-form class="form" @submit.prevent="handleFindRepresentatives">
           <b-container>
             <b-row class="justify-content-center">
               <b-col cols="12" sm="6">
@@ -16,15 +18,20 @@
                   <b-form-input
                     id="input-1"
                     ref="zipcode"
-                    aria-describedby="Enter zipcode."
                     class="zipcode-input"
+                    :class="{'zipcode-input-error': zipcodeHasError}"
                     v-model="zipcode"
-                    type="text"
+                    type="number"
                     required
                     placeholder="Enter zipcode"
                     variant="dark"
                     autocomplete="postal-code"
                   ></b-form-input>
+
+                  <div class="zipcode-error" v-if="zipcodeHasError">
+                      Error: This zipcode does not exist.  Try reentering your zipcode.
+                  </div>
+
                   <b-button 
                     variant="light"
                     class="button-main"
@@ -41,7 +48,7 @@
 
     <!-- Where reps pulled from google civics api will show -->
     <b-container class="section rep-section" v-if="!_.isEmpty(this.representatives)">
-      <h2 class="section-header">Representatives</h2>
+      <h2 class="section-header" id="reps-header">Representatives</h2>
       <div
         v-for="rep in representatives"
         :key="rep.name"
@@ -68,7 +75,7 @@
 
     <!-- Footer -->
     <div v-bind:class="{ 'top-border': !_.isEmpty(this.representatives) }" class="section">
-      <h2 class="section-header">Data & Attributions</h2>
+      <h2 class="section-header" id="attributions-header">Data & Attributions</h2>
       <h5>Representative contact information sourced from the <a href="https://developers.google.com/civic-information">Google Civic Information API.</a><br>
         Header image sourced from <a href="https://unsplash.com/@koshuuu">Koshu Kunii via Unsplash.</a><br>
         Email details sourced from <a href="https://www.joincampaignzero.org">Campaign Zero.</a>
@@ -101,8 +108,7 @@
 <script>
 import { getRepresentatives } from "./endpoints";
 import emailTemplate from './assets/email_template.json'; 
-
-console.log(emailTemplate); 
+import VueScrollTo from 'vue-scrollto';
 
 export default {
   name: "App",
@@ -111,9 +117,24 @@ export default {
     this.$refs.zipcode.$el.focus();
   },
   methods: {
-    populateRepresentatives: async function() {
-      this.$ga.event('contact', 'click', 'clicked contact')
-      this.representatives = await getRepresentatives(this.zipcode);
+    handleFindRepresentatives: async function() {
+        // unfocus zipcode input after submission.  This will cause the software keyboard
+        // on mobile devices to collapse after clicking "Go".
+        this.$refs.zipcode.$el.blur();
+        this.$ga.event('contact', 'click', 'clicked find representatives')
+        
+        try {
+            this.representatives = await getRepresentatives(this.zipcode);
+            this.zipcodeHasError = false;
+            // once reps render (on next DOM cycle) scroll user to them
+            this.$nextTick(function () {
+                VueScrollTo.scrollTo('#reps-header');
+            })
+        }
+        catch {
+            this.representatives = {};
+            this.zipcodeHasError = true;
+        }
     },
     clickedContact: function(rep) {
       this.selectedRepresentative = rep;
@@ -129,6 +150,7 @@ export default {
   },
   data: () => ({
     zipcode: "",
+    zipcodeHasError: false,
     representatives: {},
     selectedRepresentative: { name: 'Placeholder', emails: [], phones: [] },
     emailSubject: emailTemplate.subject,
@@ -309,12 +331,46 @@ hr {
   margin-top: 20px;
   border: 0;
   color: white;
-  background-color: #00000030;
+  background-color: #00000030 !important;
   outline: 2px solid white;
 }
 
 .zipcode-input::placeholder {
   color: #d2d2d2;
+}
+
+.zipcode-input-error {
+    outline: 2px solid #ffbebe;
+}
+
+.zipcode-error {
+    margin-top: 10px;
+    color: #ffbebe;
+}
+
+// hide up/down arrows on numbered inputs
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset;
 }
 
 </style>
