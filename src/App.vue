@@ -83,9 +83,9 @@
     <!-- Footer -->
     <div v-bind:class="{ 'top-border': !_.isEmpty(this.representatives) }" class="section">
       <h2 class="section-header" id="attributions-header">Data & Attributions</h2>
-      <h5>Representative contact information comes from the <a href="https://developers.google.com/civic-information">Google Civic Information API.</a><br>
-        Sources for the data in the email come from <a href="https://www.joincampaignzero.org">Campaign Zero.</a><br> 
-        Header image sourced from <a href="https://unsplash.com/@koshuuu">Koshu Kunii via Unsplash.</a> 
+      <h5>Representative contact information sourced from the <a href="https://developers.google.com/civic-information">Google Civic Information API.</a><br>
+        Header image sourced from <a href="https://unsplash.com/@koshuuu">Koshu Kunii via Unsplash.</a><br>
+        Email details sourced from <a href="https://www.joincampaignzero.org">Campaign Zero.</a>
       </h5>
       <b-button
         href="https://www.joincampaignzero.org/"
@@ -226,6 +226,9 @@ h2 {
 }
 
 @include media-breakpoint-down(xs) {
+  h1 {
+    font-size: 2.5rem;
+  }
   h2 {
     font-size: 2rem;
   }
