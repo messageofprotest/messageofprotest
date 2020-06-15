@@ -23,4 +23,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           BRANCH: master # The branch the action should deploy to.
           FOLDER: dist # The folder the action should deploy.
-          REPOSITORY_NAME: yayboys/yayboys.github.io # Push build to this repo
+          REPOSITORY_NAME: messageofprotest/messageofprotest.github.io # Push build to this repo
