@@ -4,7 +4,7 @@
       <b-container class="header-container" >
 
         <!-- Headers -->
-        <h1>Together we can end police violence in America</h1>
+        <h1>Together we can end police violence in America.</h1>
         <p
           class="subtitle"
         >Contact your representatives and demand evidence-based change for police reform</p>
@@ -15,21 +15,26 @@
             <b-row class="justify-content-center">
               <b-col cols="12" sm="6">
                 <b-form-group label-for="input-1">
-                  <b-form-input
-                    id="input-1"
-                    ref="zipcode"
-                    class="zipcode-input"
-                    :class="{'zipcode-input-error': zipcodeHasError}"
-                    v-model="zipcode"
-                    type="number"
-                    required
-                    placeholder="Enter zipcode"
-                    variant="dark"
-                    autocomplete="postal-code"
-                  ></b-form-input>
+
+                  <div class="zipcode-input-container">
+                    <b-form-input
+                        id="input-1"
+                        ref="zipcode"
+                        class="zipcode-input"
+                        :class="{'zipcode-input-error': zipcodeHasError}"
+                        v-model="zipcode"
+                        type="number"
+                        required
+                        placeholder="Enter zipcode"
+                        variant="dark"
+                        autocomplete="postal-code"
+                    >
+                    </b-form-input>
+                    <b-spinner class="zipcode-spinner" v-if="loading" label="Loading..."></b-spinner>
+                  </div>
 
                   <div class="zipcode-error" v-if="zipcodeHasError">
-                      Error: This zipcode does not exist.  Try reentering your zipcode.
+                      This zipcode does not exist.  Try reentering your zipcode.
                   </div>
 
                   <b-button 
@@ -37,7 +42,9 @@
                     class="button-main"
                     size="lg"
                     type="submit"
-                  >Find Your Representatives</b-button>
+                  >
+                    Find Your Representatives
+                  </b-button>
                 </b-form-group>
               </b-col>
             </b-row>
@@ -124,6 +131,7 @@ export default {
         this.$ga.event('contact', 'click', 'clicked find representatives')
         
         try {
+            this.loading = true;
             this.representatives = await getRepresentatives(this.zipcode);
             this.zipcodeHasError = false;
             // once reps render (on next DOM cycle) scroll user to them
@@ -135,6 +143,8 @@ export default {
             this.representatives = {};
             this.zipcodeHasError = true;
         }
+        this.loading = false;
+
     },
     clickedContact: function(rep) {
       this.selectedRepresentative = rep;
@@ -154,7 +164,8 @@ export default {
     representatives: {},
     selectedRepresentative: { name: 'Placeholder', emails: [], phones: [] },
     emailSubject: emailTemplate.subject,
-    emailBody: emailTemplate.content
+    emailBody: emailTemplate.content,
+    loading: false,
   })
 };
 </script>
@@ -166,6 +177,9 @@ export default {
 
 * {
   font-family: 'Source Sans Pro', sans-serif;
+}
+
+button, div {
   border-radius: 0 !important;
 }
 
@@ -330,6 +344,8 @@ hr {
   color: white;
   background-color: #00000030 !important;
   outline: 2px solid white;
+
+  padding-right:60px !important;
 }
 
 .zipcode-input::placeholder {
@@ -340,9 +356,20 @@ hr {
     outline: 2px solid #ffbebe;
 }
 
+.zipcode-input-container {
+    position: relative;
+}
+
 .zipcode-error {
     margin-top: 10px;
     color: #ffbebe;
+}
+
+.zipcode-spinner {
+    top: 9px;
+    right: 15px;
+    position: absolute;
+    border-width: 0.2rem;
 }
 
 // hide up/down arrows on numbered inputs
