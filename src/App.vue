@@ -2,6 +2,8 @@
   <div id="app" variant="dark">
     <div class="header">
       <b-container class="header-container" >
+
+        <!-- Headers -->
         <h1>Together we can end police violence in America</h1>
         <p
           class="subtitle"
@@ -17,6 +19,7 @@
                     id="input-1"
                     ref="zipcode"
                     class="zipcode-input"
+                    :class="{'zipcode-input-error': zipcodeHasError}"
                     v-model="zipcode"
                     type="number"
                     required
@@ -24,6 +27,11 @@
                     variant="dark"
                     autocomplete="postal-code"
                   ></b-form-input>
+
+                  <div class="zipcode-error" v-if="zipcodeHasError">
+                      Error: This zipcode does not exist.  Try reentering your zipcode.
+                  </div>
+
                   <b-button 
                     variant="light"
                     class="button-main"
@@ -114,12 +122,19 @@ export default {
         // on mobile devices to collapse after clicking "Go".
         this.$refs.zipcode.$el.blur();
         this.$ga.event('contact', 'click', 'clicked find representatives')
-        this.representatives = await getRepresentatives(this.zipcode);
-
-        // once reps render (on next DOM cycle) scroll user to them
-        this.$nextTick(function () {
-            VueScrollTo.scrollTo('#reps-header');
-        })
+        
+        try {
+            this.representatives = await getRepresentatives(this.zipcode);
+            this.zipcodeHasError = false;
+            // once reps render (on next DOM cycle) scroll user to them
+            this.$nextTick(function () {
+                VueScrollTo.scrollTo('#reps-header');
+            })
+        }
+        catch {
+            this.representatives = {};
+            this.zipcodeHasError = true;
+        }
     },
     clickedContact: function(rep) {
       this.selectedRepresentative = rep;
@@ -135,6 +150,7 @@ export default {
   },
   data: () => ({
     zipcode: "",
+    zipcodeHasError: false,
     representatives: {},
     selectedRepresentative: { name: 'Placeholder', emails: [], phones: [] },
     emailSubject: emailTemplate.subject,
@@ -318,6 +334,15 @@ hr {
 
 .zipcode-input::placeholder {
   color: #d2d2d2;
+}
+
+.zipcode-input-error {
+    outline: 2px solid #ffbebe;
+}
+
+.zipcode-error {
+    margin-top: 10px;
+    color: #ffbebe;
 }
 
 // hide up/down arrows on numbered inputs
