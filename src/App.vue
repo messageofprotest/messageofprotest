@@ -104,7 +104,7 @@
       <div id="email-body">{{ copyBody }}</div>
       <div class="m-footer">
         <b-button v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody" v-if="selectedRepresentative.emails" type="submit" class="modal-button"><b-icon icon="envelope"></b-icon> Email</b-button>
-        <b-button v-if="selectedRepresentative.phones" class="modal-button"><b-icon icon="phone"></b-icon> {{ selectedRepresentative.phones[0] }}</b-button>
+        <b-button v-bind:href="'tel:+' + selectedRepresentative.phones" v-if="selectedRepresentative.phones" class="modal-button"><b-icon icon="phone"></b-icon> {{ selectedRepresentative.phones[0] }}</b-button>
         <b-button class="modal-button" @click="copyToClipboard"><b-icon icon="paperclip"></b-icon></b-button>
       </div>
     </b-modal>
