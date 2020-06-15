@@ -179,7 +179,7 @@ export default {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-button, div {
+button, div, a {
   border-radius: 0 !important;
 }
 
