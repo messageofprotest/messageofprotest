@@ -8,7 +8,7 @@
         >Contact your representatives and demand evidence-based change for police reform</p>
 
         <!-- Input and Button -->
-        <b-form class="form" @submit.prevent="populateRepresentatives">
+        <b-form class="form" @submit.prevent="handleFindRepresentatives">
           <b-container>
             <b-row class="justify-content-center">
               <b-col cols="12" sm="6">
@@ -111,9 +111,12 @@ export default {
     this.$refs.zipcode.$el.focus();
   },
   methods: {
-    populateRepresentatives: async function() {
-      this.$ga.event('contact', 'click', 'clicked contact')
-      this.representatives = await getRepresentatives(this.zipcode);
+    handleFindRepresentatives: async function() {
+        // unfocus zipcode input after submission.  This will cause the software keyboard
+        // on mobile devices to collapse after clicking "Go".
+        this.$refs.zipcode.$el.blur();
+        this.$ga.event('contact', 'click', 'clicked find representatives')
+        this.representatives = await getRepresentatives(this.zipcode);
     },
     clickedContact: function(rep) {
       this.selectedRepresentative = rep;
