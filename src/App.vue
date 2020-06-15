@@ -16,10 +16,9 @@
                   <b-form-input
                     id="input-1"
                     ref="zipcode"
-                    aria-describedby="Enter zipcode."
                     class="zipcode-input"
                     v-model="zipcode"
-                    type="text"
+                    type="number"
                     required
                     placeholder="Enter zipcode"
                     variant="dark"
@@ -309,12 +308,37 @@ hr {
   margin-top: 20px;
   border: 0;
   color: white;
-  background-color: #00000030;
+  background-color: #00000030 !important;
   outline: 2px solid white;
 }
 
 .zipcode-input::placeholder {
   color: #d2d2d2;
+}
+
+// hide up/down arrows on numbered inputs
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset;
 }
 
 </style>
