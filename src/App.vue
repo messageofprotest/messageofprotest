@@ -101,7 +101,7 @@
 
     <!-- Contact Modal -->
     <b-modal id="contact-modal" v-bind:title="'Contact ' + selectedRepresentative.name" hide-footer>
-      <div id="email-body">{{ emailBody }}</div>
+      <div id="email-body">{{ copyBody }}</div>
       <div class="m-footer">
         <b-button v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody" v-if="selectedRepresentative.emails" type="submit" class="modal-button"><b-icon icon="envelope"></b-icon> Email</b-button>
         <b-button v-if="selectedRepresentative.phones" class="modal-button"><b-icon icon="phone"></b-icon> {{ selectedRepresentative.phones[0] }}</b-button>
@@ -165,6 +165,7 @@ export default {
     selectedRepresentative: { name: 'Placeholder', emails: [], phones: [] },
     emailSubject: emailTemplate.subject,
     emailBody: emailTemplate.content,
+    copyBody: decodeURIComponent(emailTemplate.content),
     loading: false,
   })
 };
