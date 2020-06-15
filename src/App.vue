@@ -40,7 +40,7 @@
 
     <!-- Where reps pulled from google civics api will show -->
     <b-container class="section rep-section" v-if="!_.isEmpty(this.representatives)">
-      <h2 class="section-header">Representatives</h2>
+      <h2 class="section-header" id="reps-header">Representatives</h2>
       <div
         v-for="rep in representatives"
         :key="rep.name"
@@ -67,7 +67,7 @@
 
     <!-- Footer -->
     <div v-bind:class="{ 'top-border': !_.isEmpty(this.representatives) }" class="section">
-      <h2 class="section-header">Data & Attributions</h2>
+      <h2 class="section-header" id="attributions-header">Data & Attributions</h2>
       <h5>Representative contact information comes from the <a href="https://developers.google.com/civic-information">Google Civic Information API.</a><br>
         Sources for the data in the email come from <a href="https://www.joincampaignzero.org">Campaign Zero.</a><br> 
         Header image sourced from <a href="https://unsplash.com/@koshuuu">Koshu Kunii via Unsplash.</a> 
@@ -100,8 +100,7 @@
 <script>
 import { getRepresentatives } from "./endpoints";
 import emailTemplate from './assets/email_template.json'; 
-
-console.log(emailTemplate); 
+import VueScrollTo from 'vue-scrollto';
 
 export default {
   name: "App",
@@ -116,6 +115,11 @@ export default {
         this.$refs.zipcode.$el.blur();
         this.$ga.event('contact', 'click', 'clicked find representatives')
         this.representatives = await getRepresentatives(this.zipcode);
+
+        // once reps render (on next DOM cycle) scroll user to them
+        this.$nextTick(function () {
+            VueScrollTo.scrollTo('#reps-header');
+        })
     },
     clickedContact: function(rep) {
       this.selectedRepresentative = rep;
