@@ -215,6 +215,30 @@ a {
   border-radius: 0 !important;
 }
 
+a {
+  text-decoration: underline;
+  color: inherit;
+  transition-duration: 0.4s;
+}
+
+a:hover { 
+  color: #fce21b; 
+}
+
+
+.btn {
+  text-decoration: none;
+  transition-duration: 0.4s;
+}
+
+.btn:hover {
+  background-color: #fce21b;
+  border-color: #fce21b;
+  
+}
+
+
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
