@@ -122,6 +122,7 @@
           v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody"
           v-if="selectedRepresentative.emails"
           type="submit"
+          @click="fireEmailGAEvent"
           class="modal-button"
         >
           <b-icon icon="envelope"></b-icon> Email
@@ -129,6 +130,7 @@
         <b-button
           v-bind:href="'tel:+' + selectedRepresentative.phones"
           v-if="selectedRepresentative.phones"
+          @click="firePhoneGAEvent"
           class="modal-button"
         >
           <b-icon icon="phone"></b-icon>
@@ -179,13 +181,21 @@ export default {
       this.selectedRepresentative = rep;
     },
     copyToClipboard: function() {
+      this.$ga.event("copy", "click", "user copied message text");
       var range = document.createRange();
       range.selectNode(document.getElementById("email-body"));
       window.getSelection().removeAllRanges(); // clear current selection
       window.getSelection().addRange(range); // to select text
       document.execCommand("copy");
       window.getSelection().removeAllRanges(); // to deselect
+    },
+    fireEmailGAEvent: function() {
+      this.$ga.event("email", "click", "user emailed representative");
+    }, 
+    firePhoneGAEvent: function() {
+      this.$ga.event("phone", "click", "user phoned representative");
     }
+
   },
   data: () => ({
     zipcode: "",
