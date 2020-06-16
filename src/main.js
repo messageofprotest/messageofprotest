@@ -7,6 +7,15 @@ import App from './App.vue'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import _ from 'lodash';
 import VueScrollTo from 'vue-scrollto';
+import 'vue-awesome/icons/brands/facebook-square'
+import 'vue-awesome/icons/brands/twitter'
+import Icon from 'vue-awesome/components/Icon'
+import CloseIcon from 'vue-material-design-icons/Close.vue';
+
+Vue.component('close-icon', CloseIcon);
+
+// globally (in your main .js file)
+Vue.component('v-icon', Icon)
 
 Vue.use(VueScrollTo, {
     offset: -20,

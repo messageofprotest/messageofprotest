@@ -141,6 +141,23 @@
         </b-button>
       </div>
     </b-modal>
+
+    <!-- Thank You Modal -->
+    <b-modal id="thank-you-modal" content-class="modal-content" size="lg" hide-footer>
+      <template v-slot:modal-header="{ }">
+        <div>Thank you for joining this movement.</div>
+        <close-icon></close-icon>
+      </template>
+
+      <div id="thank-you-body">
+        <p>Together, with sustained pressure, we can make real change in policing.</p>
+        <p>Please spread the word using the buttons below.  It will maximize the impact of this messaging campaign.</p>
+        <b-row class="social-icons-row" align-h="center">
+          <v-icon name="brands/facebook-square" scale="2.5" style="color: rgb(43, 43, 43)"/>
+          <v-icon name="brands/twitter" scale="2.5" style="color: rgb(43, 43, 43)"/>
+        </b-row>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -367,6 +384,35 @@ hr {
     padding: 0.25rem 0.5rem;
     font-size: 0.9rem;
   }
+}
+
+.modal-content {
+  color: black;
+
+  .modal-body {
+    font-size: 20px;
+  }
+
+  .modal-header {
+    justify-content: center;
+    font-size: 24px;
+    margin-right: 20px;
+    text-align: center;
+
+    div {
+      font-family: "Montserrat", sans-serif;
+    }
+
+    .close-icon {
+      position: absolute;
+      right: 20px;
+    }
+  }
+}
+
+.social-icons-row > * {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .rep-container {
