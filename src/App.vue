@@ -91,12 +91,13 @@
         href="https://www.joincampaignzero.org/"
         variant="light"
         class="button-main"
+        @click="C0ButtonClicked"
         size="lg"
       >Support Campaign Zero</b-button>
     </div>
     <div class="top-border section">
       <p class="footer-text">Black Lives Matter.</p>
-      <p class="footer-text">Made in Washington, D.C. by <a href="https://jprathipati.com">Jayanth Prathipati</a>, <a href="https://www.dominic-napoleon.com">Dominic Napoleon</a>, and Nathan Smith</p>
+      <p class="footer-text">Made in Washington, D.C. by <a href="https://jprathipati.com">Jayanth Prathipati</a>, <a href="https://www.dominic-napoleon.com">Dominic Napoleon</a>, and <a href="https://github.com/smitto"> Nathan Smith</a></p>
     </div>
 
     <!-- Contact Modal -->
@@ -195,6 +196,9 @@ export default {
     }, 
     firePhoneGAEvent: function() {
       this.$ga.event("phone", "click", "user phoned representative");
+    },
+    C0ButtonClicked: function() {
+      this.$ga.event("C0", "click", "user clicked Campaign Zero link");
     }
 
   },
@@ -235,6 +239,8 @@ a {
 a:hover { 
   color: #fce21b; 
 }
+
+
 
 
 .btn {
@@ -434,6 +440,7 @@ hr {
 .zipcode-input::placeholder {
   color: #d2d2d2;
 }
+
 
 .zipcode-input-error {
   outline: 2px solid #ffbebe;
