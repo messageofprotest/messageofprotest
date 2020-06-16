@@ -3,7 +3,7 @@
     <div class="header">
       <b-container class="header-container">
         <!-- Headers -->
-        <h1>Together we can end police violence in America.</h1>
+        <h1>Together we can end police violence in America</h1>
         <p
           class="subtitle"
         >Contact your representatives and demand evidence-based change for police reform</p>
@@ -96,7 +96,7 @@
     </div>
     <div class="top-border section">
       <p class="footer-text">Black Lives Matter.</p>
-      <p class="footer-text">Made in Washington, D.C. by @jayprat95, @slurpee123abc, and @smitto</p>
+      <p class="footer-text">Made in Washington, D.C. by <a href="https://jprathipati.com">Jayanth Prathipati</a>, <a href="https://www.dominic-napoleon.com">Dominic Napoleon</a>, and Nathan Smith</p>
     </div>
 
     <!-- Contact Modal -->
@@ -123,6 +123,7 @@
           v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody"
           v-if="selectedRepresentative.emails"
           type="submit"
+          @click="fireEmailGAEvent"
           class="modal-button"
         >
           <b-icon icon="envelope"></b-icon> Email
@@ -130,6 +131,7 @@
         <b-button
           v-bind:href="'tel:+' + selectedRepresentative.phones"
           v-if="selectedRepresentative.phones"
+          @click="firePhoneGAEvent"
           class="modal-button"
         >
           <b-icon icon="phone"></b-icon>
@@ -180,13 +182,21 @@ export default {
       this.selectedRepresentative = rep;
     },
     copyToClipboard: function() {
+      this.$ga.event("copy", "click", "user copied message text");
       var range = document.createRange();
       range.selectNode(document.getElementById("email-body"));
       window.getSelection().removeAllRanges(); // clear current selection
       window.getSelection().addRange(range); // to select text
       document.execCommand("copy");
       window.getSelection().removeAllRanges(); // to deselect
+    },
+    fireEmailGAEvent: function() {
+      this.$ga.event("email", "click", "user emailed representative");
+    }, 
+    firePhoneGAEvent: function() {
+      this.$ga.event("phone", "click", "user phoned representative");
     }
+
   },
   data: () => ({
     zipcode: "",
