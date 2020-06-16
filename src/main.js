@@ -8,6 +8,14 @@ import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import _ from 'lodash';
 import VueScrollTo from 'vue-scrollto';
 
+// only import the icons you use to reduce bundle size
+import 'vue-awesome/icons/brands/facebook-square'
+import 'vue-awesome/icons/brands/twitter'
+import Icon from 'vue-awesome/components/Icon'
+
+// globally (in your main .js file)
+Vue.component('v-icon', Icon)
+
 Vue.use(VueScrollTo, {
     offset: -20,
 });

@@ -65,7 +65,7 @@
               <b-col cols="12" sm="5">
                 <b-button
                   class="contact-button"
-                  v-b-modal.contact-modal
+                  v-b-modal.thank-you-modal
                   variant="light"
                   @click="clickedContact(rep)"
                 >Contact</b-button>
@@ -100,7 +100,7 @@
     </div>
 
     <!-- Contact Modal -->
-    <b-modal id="contact-modal" v-bind:title="'Contact ' + selectedRepresentative.name" hide-footer>
+    <b-modal id="contact-modal" v-bind:title="'Contact ' + selectedRepresentative.name" hide-footer size="lg">
       <div id="email-body">
         To whom it may concern, <br> <br>
         I am a concerned representative in your district writing today to voice my support and encouragement for the continued improvement of policing in our jurisdiction. Over 1000 people are killed by police violence each year in America and we can effectively reduce this violence by implementing research-based policy solutions. 
@@ -114,13 +114,12 @@
         As a taxpayer, I whole-heartedly support strengthening or introducing these policies in our jurisdiction. It’s clear that in the near future these sorts of training, as well as the use of BWCs will be the standard for all jurisdictions in our country. I hope our jurisdiction can lead out in determining best practices and policies for the safety of all in our community. 
         <br> <br> 
         Thank you in advance for your time and have a good day!
-
-
       </div>
       <div class="m-footer">
         <b-button
           v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody"
           v-if="selectedRepresentative.emails"
+          @click="handleOpenThankyouModal"
           type="submit"
           class="modal-button"
         >
@@ -129,17 +128,46 @@
         <b-button
           v-bind:href="'tel:+' + selectedRepresentative.phones"
           v-if="selectedRepresentative.phones"
+          @click="handleOpenThankyouModal"
           class="modal-button"
         >
           <b-icon icon="phone"></b-icon>
           {{ selectedRepresentative.phones[0] }}
         </b-button>
-        <b-button class="modal-button" @click="copyToClipboard">
+        <b-button class="modal-button" @click="copyToClipboard(); handleOpenThankyouModal();">
           <b-icon icon="paperclip"></b-icon>
         </b-button>
       </div>
     </b-modal>
-  </div>
+
+    <!-- Thank you modal -->
+    <b-modal id="thank-you-modal" content-class="dark-modal" title="Thank you." hide-footer size="lg">
+      <template v-slot:modal-header="{ }">
+        Thank you for joining this movement.
+      </template>
+
+      <div id="thank-you-body">
+        <p>Together, we sustained pressure, we can make real change.</p>
+        <p>Please share to your social media using the buttons below.  It will maximize the impact of this messaging campaign.</p>
+        <b-row class="social-icons-row" align-h="center">
+          <v-icon name="brands/facebook-square" scale="2" style="color: rgb(88, 137, 241)"/>
+          <v-icon name="brands/twitter" scale="2" style="color: #00acee"/>
+        </b-row>
+
+      </div>
+
+      <div class="m-footer">
+      </div>
+
+      <b-button
+        class="modal-button"
+      >
+        Close
+      </b-button>
+
+    </b-modal>
+
+    </div>
 </template>
 
 
@@ -185,6 +213,10 @@ export default {
       window.getSelection().addRange(range); // to select text
       document.execCommand("copy");
       window.getSelection().removeAllRanges(); // to deselect
+    },
+    handleOpenThankyouModal: function() {
+      this.$bvModal.hide('contact-modal');
+      this.$bvModal.show('thank-you-modal');
     }
   },
   data: () => ({
@@ -343,12 +375,16 @@ hr {
   text-align: left;
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #808080;
 }
 
 .modal-button {
   float: left;
   margin-right: 10px;
+}
+
+.modal-body {
+    font-size: 24px;
 }
 
 // make buttons smaller on mobile to fit on one line
@@ -357,6 +393,33 @@ hr {
     padding: 0.25rem 0.5rem;
     font-size: 0.9rem;
   }
+}
+
+.dark-modal {
+  background-color: black;
+  border: 2px solid #808080;
+
+  .modal-header {
+    font-size: 30px;
+    color: #d4d4d4;
+    font-weight: 600;
+    justify-content: center;
+    border-bottom: 2px solid #808080;
+    text-align: center;
+  }
+
+  .modal-button {
+    float: right;
+    margin-right: 0px;
+    border: 2px #d0d0d0 solid;
+    background: black;
+    color: #dedede;
+    font-size: 20px;
+  }
+}
+
+.social-icons-row > * {
+    margin: 1rem;
 }
 
 .rep-container {
