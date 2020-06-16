@@ -3,7 +3,7 @@
     <div class="header">
       <b-container class="header-container">
         <!-- Headers -->
-        <h1>Together we can end police violence in America.</h1>
+        <h1>Together we can end police violence in America</h1>
         <p
           class="subtitle"
         >Contact your representatives and demand evidence-based change for police reform</p>
@@ -96,7 +96,7 @@
     </div>
     <div class="top-border section">
       <p class="footer-text">Black Lives Matter.</p>
-      <p class="footer-text">Made in Washington, D.C. by @jayprat95, @slurpee123abc, and @smitto</p>
+      <p class="footer-text">Made in Washington, D.C. by <a href="https://jprathipati.com">Jayanth Prathipati</a>, <a href="https://www.dominic-napoleon.com">Dominic Napoleon</a>, and Nathan Smith</p>
     </div>
 
     <!-- Contact Modal -->
