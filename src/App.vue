@@ -100,7 +100,10 @@
     </div>
 
     <!-- Contact Modal -->
-    <b-modal id="contact-modal" v-bind:title="'Contact ' + selectedRepresentative.name" hide-footer>
+    <b-modal id="contact-modal" scrollable size="lg" centered>
+      <template v-slot:modal-title>
+        Contact {{ selectedRepresentative.name }}
+      </template>
       <div id="email-body">
         To whom it may concern, <br> <br>
         I am a concerned representative in your district writing today to voice my support and encouragement for the continued improvement of policing in our jurisdiction. Over 1000 people are killed by police violence each year in America and we can effectively reduce this violence by implementing research-based policy solutions. 
@@ -114,10 +117,8 @@
         As a taxpayer, I whole-heartedly support strengthening or introducing these policies in our jurisdiction. It’s clear that in the near future these sorts of training, as well as the use of BWCs will be the standard for all jurisdictions in our country. I hope our jurisdiction can lead out in determining best practices and policies for the safety of all in our community. 
         <br> <br> 
         Thank you in advance for your time and have a good day!
-
-
       </div>
-      <div class="m-footer">
+      <template v-slot:modal-footer>
         <b-button
           v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody"
           v-if="selectedRepresentative.emails"
@@ -137,7 +138,7 @@
         <b-button class="modal-button" @click="copyToClipboard">
           <b-icon icon="paperclip"></b-icon>
         </b-button>
-      </div>
+      </template>
     </b-modal>
   </div>
 </template>
@@ -237,8 +238,6 @@ a:hover {
   
 }
 
-
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -322,10 +321,24 @@ h2 {
 }
 
 // make header spacing smaller on mobile
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(xs) {
   .header-container {
     margin-top: 30px;
     margin-bottom: 15px;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .modal-dialog,
+  .modal-content {
+    /* 80% of window height */
+    height: 80%;
+  }
+
+  .modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    max-height: calc(100% - 120px);
+    overflow-y: scroll;
   }
 }
 
@@ -339,24 +352,25 @@ hr {
   margin-top: 20px;
 }
 
-.m-footer {
-  text-align: left;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #dee2e6;
-}
-
 .modal-button {
   float: left;
   margin-right: 10px;
 }
 
 // make buttons smaller on mobile to fit on one line
-@include media-breakpoint-down(xs) {
+@media (max-width: 350px) {
   .modal-button {
     padding: 0.25rem 0.5rem;
     font-size: 0.9rem;
   }
+}
+
+.modal-title {
+  font-family: "Montserrat", sans-serif;
+}
+
+.modal-footer {
+  justify-content: left;
 }
 
 .rep-container {
