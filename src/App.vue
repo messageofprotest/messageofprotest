@@ -417,6 +417,11 @@ hr {
 .modal-button {
   float: left;
   margin-right: 10px;
+
+  &:hover {
+    color: black;
+    outline: solid black 2px;
+  }
 }
 
 // make buttons smaller on mobile to fit on one line
