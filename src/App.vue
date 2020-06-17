@@ -138,7 +138,12 @@
           <b-icon icon="phone"></b-icon>
           Call
         </b-button>
-        <b-button class="modal-button" @click="copyToClipboard">
+
+        <b-popover ref="copy-paste-popover" target="copy-email-text-button" variant="success" triggers="click blur" placement="top">
+          Email text has been copied to your clipboard.
+        </b-popover>
+
+        <b-button id="copy-email-text-button" class="modal-button" @click="copyToClipboard">
           <b-icon icon="paperclip"></b-icon>
         </b-button>
 
@@ -189,8 +194,6 @@ export default {
     },
   },
   methods: {
-    extractSocialIdFromRep,
-    makeTwitterLink,
     handleFindRepresentatives: async function() {
       // unfocus zipcode input after submission.  This will cause the software keyboard
       // on mobile devices to collapse after clicking "Go".
@@ -215,6 +218,10 @@ export default {
       this.selectedRepresentative = rep;
     },
     copyToClipboard: function() {
+
+      // once the "text has been copied" notification is shown, hide it after a few seconds
+      setTimeout(() => this.$refs['copy-paste-popover'].$emit('close'), 5000);
+
       this.$ga.event("copy", "click", "user copied message text");
       var range = document.createRange();
       range.selectNode(document.getElementById("email-body"));
@@ -231,6 +238,13 @@ export default {
     },
     C0ButtonClicked: function() {
       this.$ga.event("C0", "click", "user clicked Campaign Zero link");
+    },
+    makeToast: function() {
+      this.$bvToast.toast('Email text copied to clipboard.', {
+        variant: 'success',
+        'no-close-button': true,
+        solid: true,
+      })
     }
 
   },
@@ -521,6 +535,15 @@ hr {
   right: 15px;
   position: absolute;
   border-width: 0.2rem;
+}
+
+.toast-header {
+  display: none;
+}
+
+.toast-body, .popover-body {
+  color: black !important;
+  font-size: 20px;
 }
 
 // hide up/down arrows on numbered inputs
