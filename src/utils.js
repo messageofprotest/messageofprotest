@@ -6,3 +6,30 @@
 export const includesAny = (aList, bList) => {
     return bList.some(b => aList.includes(b));
 }
+
+/**
+ * Rep object from google civics api, along with the type of social
+ * network you want extract.
+ * @param rep repo object from civics api
+ * @param type name of social network, for instance "facebook", "twitter", "linkedin"
+ */
+export const extractSocialIdFromRep = (rep, type) => {
+    if(rep.channels) {
+        for(let channel of rep.channels) {
+            if(stringsMatch(type, channel.type))
+                return channel.id;
+        }    
+    }
+}
+
+// case insensitive string matching
+export const stringsMatch = (a, b) => {
+    return a.toLowerCase() == b.toLowerCase();
+}
+
+export const makeTwitterLink = (text, hashtags, url) => {
+    text = encodeURI(text);
+    hashtags = String(hashtags);
+    url = encodeURI(url);
+    return `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}&url=${url}`;
+}

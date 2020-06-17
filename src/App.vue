@@ -136,10 +136,14 @@
           class="modal-button"
         >
           <b-icon icon="phone"></b-icon>
-          {{ selectedRepresentative.phones[0] }}
+          Call
         </b-button>
         <b-button class="modal-button" @click="copyToClipboard">
           <b-icon icon="paperclip"></b-icon>
+        </b-button>
+
+        <b-button class="modal-button" :href="repTweetURL" v-if="repTweetURL" target="_blank">
+          <v-icon name="brands/twitter" scale="1.2"/>
         </b-button>
       </template>
     </b-modal>
@@ -168,6 +172,7 @@
 import { getRepresentatives } from "./endpoints";
 import emailTemplate from "./assets/email_template.json";
 import VueScrollTo from "vue-scrollto";
+import { extractSocialIdFromRep, makeTwitterLink } from './utils';
 
 export default {
   name: "App",
@@ -175,7 +180,17 @@ export default {
     // focus input on page load, helpful for usability and screenreaders
     this.$refs.zipcode.$el.focus();
   },
+  computed: {
+    repTweetURL: function() {
+      const id = extractSocialIdFromRep(this.selectedRepresentative, 'twitter');
+      if(!id) return null;
+      const text = `@${id} lorem ipsum`;
+      return makeTwitterLink(text, 'BlackLivesMatter', 'https://www.messageofprotest.com');
+    },
+  },
   methods: {
+    extractSocialIdFromRep,
+    makeTwitterLink,
     handleFindRepresentatives: async function() {
       // unfocus zipcode input after submission.  This will cause the software keyboard
       // on mobile devices to collapse after clicking "Go".
@@ -365,7 +380,7 @@ h2 {
   .modal-dialog,
   .modal-content {
     /* 80% of window height */
-    height: 80%;
+    height: 90%;
   }
 
   .modal-body {
