@@ -7,9 +7,10 @@ import App from './App.vue'
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import _ from 'lodash';
 import VueScrollTo from 'vue-scrollto';
-import 'vue-awesome/icons/brands/facebook-square'
-import 'vue-awesome/icons/brands/twitter'
-import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons/brands/facebook-square';
+import 'vue-awesome/icons/brands/twitter';
+import 'vue-awesome/icons/regular/lightbulb';
+import Icon from 'vue-awesome/components/Icon';
 import CloseIcon from 'vue-material-design-icons/Close.vue';
 import ContentCopyIcon from 'vue-material-design-icons/ContentCopy.vue';
 
