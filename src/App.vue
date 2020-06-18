@@ -82,11 +82,11 @@
       <h2 class="section-header" id="attributions-header">Data & Attributions</h2>
       <h5>
         Representative contact information sourced from the
-        <a href="https://developers.google.com/civic-information">Google Civic Information API.</a>
+        <a href="https://developers.google.com/civic-information" target="_blank">Google Civic Information API.</a>
         <br />Header image sourced from
-        <a href="https://unsplash.com/@koshuuu">Koshu Kunii via Unsplash.</a>
+        <a href="https://unsplash.com/@koshuuu" target="_blank">Koshu Kunii via Unsplash.</a>
         <br />Email details sourced from
-        <a href="https://www.joincampaignzero.org">Campaign Zero.</a>
+        <a href="https://www.joincampaignzero.org" target="_blank">Campaign Zero.</a>
       </h5>
       <b-button
         href="https://www.joincampaignzero.org/"
