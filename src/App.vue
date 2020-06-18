@@ -26,6 +26,7 @@
                       placeholder="Enter zipcode"
                       variant="dark"
                       autocomplete="postal-code"
+                      @input="autosubmitZip"
                     ></b-form-input>
                     <b-spinner class="zipcode-spinner" v-if="loading" label="Loading..."></b-spinner>
                   </div>
@@ -194,6 +195,11 @@ export default {
     },
   },
   methods: {
+    autosubmitZip: async function() {
+      if(String(this.zipcode).length == 5) {
+        this.handleFindRepresentatives();
+      }
+    },
     handleFindRepresentatives: async function() {
       // unfocus zipcode input after submission.  This will cause the software keyboard
       // on mobile devices to collapse after clicking "Go".
@@ -278,6 +284,7 @@ a {
 
 a {
   text-decoration: underline;
+  text-decoration-thickness: 1px;
   color: inherit;
   transition-duration: 0.4s;
 }
