@@ -54,7 +54,7 @@
       <h2 class="section-header" id="reps-header">Representatives</h2>
       <div v-for="rep in representatives" :key="rep.name">
         <b-row align-h="center">
-          <b-col cols="12" sm="10" md="8" lg="6" class="rep-container">
+          <b-col cols="12" sm="10" md="8" lg="6" class="rep-container" v-b-modal.contact-modal @click="clickedContact(rep)" tabindex="false">
             <b-row align-v="center">
               <b-col cols="12" sm="6">
                 <h4 class="rep-name">{{ rep.name }}</h4>
@@ -144,7 +144,7 @@
         </b-popover>
 
         <b-button id="copy-email-text-button" class="modal-button" @click="copyToClipboard">
-          <b-icon icon="paperclip"></b-icon>
+          <content-copy-icon></content-copy-icon>
         </b-button>
 
         <b-button class="modal-button" :href="repTweetURL" v-if="repTweetURL" target="_blank">
@@ -286,9 +286,6 @@ a:hover {
   color: #fce21b; 
 }
 
-
-
-
 .btn {
   text-decoration: none;
   transition-duration: 0.4s;
@@ -420,7 +417,6 @@ hr {
 
   &:hover {
     color: black;
-    outline: solid black 2px;
   }
 }
 
@@ -473,6 +469,12 @@ hr {
   padding-bottom: 20px;
   padding-top: 25px;
   border-bottom: 1px solid #ffffff94;
+
+  &:hover {
+    cursor: pointer;
+    border-radius: 3px !important;
+    box-shadow: 0px 0px 0px 1px #ffffff;
+  }
 }
 
 .rep-section div:last-child > div.row > div.rep-container {

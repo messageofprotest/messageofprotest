@@ -11,8 +11,11 @@ import 'vue-awesome/icons/brands/facebook-square'
 import 'vue-awesome/icons/brands/twitter'
 import Icon from 'vue-awesome/components/Icon'
 import CloseIcon from 'vue-material-design-icons/Close.vue';
+import ContentCopyIcon from 'vue-material-design-icons/ContentCopy.vue';
+
 
 Vue.component('close-icon', CloseIcon);
+Vue.component('content-copy-icon', ContentCopyIcon);
 
 // globally (in your main .js file)
 Vue.component('v-icon', Icon)
