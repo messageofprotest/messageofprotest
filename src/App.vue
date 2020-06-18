@@ -90,6 +90,7 @@
       </h5>
       <b-button
         href="https://www.joincampaignzero.org/"
+        target="_blank"
         variant="light"
         class="button-main"
         @click="C0ButtonClicked"
@@ -98,7 +99,14 @@
     </div>
     <div class="top-border section">
       <p class="footer-text">Black Lives Matter.</p>
-      <p class="footer-text">Made in Washington, D.C. by <a href="https://jprathipati.com">Jayanth Prathipati</a>, <a href="https://www.dominic-napoleon.com">Dominic Napoleon</a>, and <a href="https://github.com/smitto"> Nathan Smith</a></p>
+      <p class="footer-text">Made in Washington, D.C. by
+        <a href="https://jprathipati.com" target="_blank">Jayanth Prathipati</a>,
+        <a href="https://www.dominic-napoleon.com" target="_blank">Dominic Napoleon</a>, and
+        <a href="https://github.com/smitto" target="_blank">Nathan Smith</a>
+      </p>
+      <p class="footer-text">
+        <a href="https://github.com/messageofprotest/messageofprotest" target="_blank"><v-icon name="brands/github" scale="1.5"/></a>
+      </p>
     </div>
 
     <!-- Contact Modal -->
@@ -108,7 +116,7 @@
       </template>
       <template v-slot:default>
         <div id="email-tip">
-          <v-icon name="regular/lightbulb" scale="1" class="icon"/> Tip: Customize this template email to get around inbox filters!
+          <span class="icon"><v-icon name="regular/lightbulb" scale="1.2"/></span> Tip: Customize this template email to get around inbox filters!
         </div>
         <div id="email-body">
           To whom it may concern, <br> <br>
@@ -401,7 +409,9 @@ h2 {
 }
 
 .icon {
-  margin: 2px 3px;
+  position: relative;
+  bottom: 2px;
+  padding-right: 4px;
 }
 
 @include media-breakpoint-down(xs) {
