@@ -106,51 +106,58 @@
       <template v-slot:modal-title>
         Contact {{ selectedRepresentative.name }}
       </template>
-      <div id="email-body">
-        To whom it may concern, <br> <br>
-        I am a concerned representative in your district writing today to voice my support and encouragement for the continued improvement of policing in our jurisdiction. Over 1000 people are killed by police violence each year in America and we can effectively reduce this violence by implementing research-based policy solutions. 
-        <br> <br> 
-        These policies include: <br> 
-        - Increasing the use of Body Worn Cameras (BWCs) <br>
-        - Increasing (or introducing) de-escalation training for police officers <br>
-        - Ending broken windows & for profit policing <br>
-        - Limiting the use of force used by police officers <br> <br> 
-        Campaign Zero maintains an agenda of recommended policy based on research found here: (<a href="https://tinyurl.com/C0-Agenda">https://tinyurl.com/C0-Agenda</a>) <br> <br> 
-        As a taxpayer, I whole-heartedly support strengthening or introducing these policies in our jurisdiction. It’s clear that in the near future these sorts of training, as well as the use of BWCs will be the standard for all jurisdictions in our country. I hope our jurisdiction can lead out in determining best practices and policies for the safety of all in our community. 
-        <br> <br> 
-        Thank you in advance for your time and have a good day!
-      </div>
+      <template v-slot:default>
+        <div id="email-tip">
+          <v-icon name="regular/lightbulb" scale="1" class="icon"/> Tip: Customize this template email to get around inbox filters!
+        </div>
+        <div id="email-body">
+          To whom it may concern, <br> <br>
+          I am a concerned representative in your district writing today to voice my support and encouragement for the continued improvement of policing in our jurisdiction. Over 1000 people are killed by police violence each year in America and we can effectively reduce this violence by implementing research-based policy solutions. 
+          <br> <br> 
+          These policies include: <br> 
+          - Increasing the use of Body Worn Cameras (BWCs) <br>
+          - Increasing (or introducing) de-escalation training for police officers <br>
+          - Ending broken windows & for profit policing <br>
+          - Limiting the use of force used by police officers <br> <br> 
+          Campaign Zero maintains an agenda of recommended policy based on research found here: (<a href="https://tinyurl.com/C0-Agenda">https://tinyurl.com/C0-Agenda</a>) <br> <br> 
+          As a taxpayer, I whole-heartedly support strengthening or introducing these policies in our jurisdiction. It’s clear that in the near future these sorts of training, as well as the use of BWCs will be the standard for all jurisdictions in our country. I hope our jurisdiction can lead out in determining best practices and policies for the safety of all in our community. 
+          <br> <br> 
+          Thank you in advance for your time and have a good day!
+        </div>
+      </template>
       <template v-slot:modal-footer>
-        <b-button
-          v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody"
-          v-if="selectedRepresentative.emails"
-          type="submit"
-          @click="fireEmailGAEvent"
-          class="modal-button"
-        >
-          <b-icon icon="envelope"></b-icon> Email
-        </b-button>
-        <b-button
-          v-bind:href="'tel:+' + selectedRepresentative.phones"
-          v-if="selectedRepresentative.phones"
-          @click="firePhoneGAEvent"
-          class="modal-button"
-        >
+        <div class="button-list">
+          <b-button
+            v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody"
+            v-if="selectedRepresentative.emails"
+            type="submit"
+            @click="fireEmailGAEvent"
+            class="modal-button"
+          >
+            <b-icon icon="envelope"></b-icon> Email
+          </b-button>
+          <b-button
+            v-bind:href="'tel:+' + selectedRepresentative.phones"
+            v-if="selectedRepresentative.phones"
+            @click="firePhoneGAEvent"
+            class="modal-button"
+          >
           <b-icon icon="phone"></b-icon>
-          Call
-        </b-button>
+            Call
+          </b-button>
 
-        <b-popover ref="copy-paste-popover" target="copy-email-text-button" variant="success" triggers="click blur" placement="top">
-          Email text has been copied to your clipboard.
-        </b-popover>
+          <b-popover ref="copy-paste-popover" target="copy-email-text-button" triggers="click blur" placement="top">
+            Email content copied!
+          </b-popover>
 
-        <b-button id="copy-email-text-button" class="modal-button" @click="copyToClipboard">
-          <content-copy-icon></content-copy-icon>
-        </b-button>
+          <b-button id="copy-email-text-button" class="modal-button" @click="copyToClipboard">
+            <content-copy-icon></content-copy-icon>
+          </b-button>
 
-        <b-button class="modal-button" :href="repTweetURL" v-if="repTweetURL" target="_blank">
-          <v-icon name="brands/twitter" scale="1.2"/>
-        </b-button>
+          <b-button class="modal-button" :href="repTweetURL" v-if="repTweetURL" target="_blank">
+            <v-icon name="brands/twitter" scale="1.2"/>
+          </b-button>
+        </div>
       </template>
     </b-modal>
 
@@ -163,7 +170,7 @@
 
       <div id="thank-you-body">
         <p>Together, with sustained pressure, we can make real change in policing.</p>
-        <p>Please spread the word using the buttons below.  It will maximize the impact of this messaging campaign.</p>
+        <p>Please spread the word using the links below. It will maximize the impact of this messaging campaign.</p>
         <b-row class="social-icons-row" align-h="center">
           <v-icon name="brands/facebook-square" scale="2.5" style="color: rgb(43, 43, 43)"/>
           <v-icon name="brands/twitter" scale="2.5" style="color: rgb(43, 43, 43)"/>
@@ -284,7 +291,6 @@ a {
 
 a {
   text-decoration: underline;
-  text-decoration-thickness: 1px;
   color: inherit;
   transition-duration: 0.4s;
 }
@@ -394,11 +400,15 @@ h2 {
   }
 }
 
+.icon {
+  margin: 2px 3px;
+}
+
 @include media-breakpoint-down(xs) {
   .modal-dialog,
   .modal-content {
-    /* 80% of window height */
-    height: 90%;
+    /* 85% of window height */
+    height: 85%;
   }
 
   .modal-body {
@@ -437,15 +447,30 @@ hr {
 
 .modal-content {
   color: black;
+  border: none;
 
   .modal-body {
     font-size: 20px;
+    margin: 0;
+    padding: 0;
+  }
+
+  #email-tip {
+    font-size: 16px !important;
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 16px;
+  }
+
+  #email-body {
+    font-size: 20px;
+    padding: 16px;
   }
 
   .modal-header {
     justify-content: center;
     font-size: 24px;
-    margin-right: 20px;
+    padding-right: 20px;
     text-align: center;
 
     div {
@@ -457,19 +482,23 @@ hr {
       right: 20px;
     }
   }
+
+  .modal-title {
+    font-family: "Montserrat", sans-serif;
+  }
+
+  .modal-footer {
+    justify-content: left;
+  }
+
+  .button-list {
+    display: flex;
+  }
 }
 
 .social-icons-row > * {
   margin-left: 1rem;
   margin-right: 1rem;
-}
-
-.modal-title {
-  font-family: "Montserrat", sans-serif;
-}
-
-.modal-footer {
-  justify-content: left;
 }
 
 .rep-container {
@@ -505,10 +534,6 @@ hr {
 .top-border {
   border-top: 2px solid white;
   padding-top: 15px;
-}
-
-.top-hr {
-  margin-top: 0px !important;
 }
 
 .zipcode-input,
@@ -556,7 +581,8 @@ hr {
 }
 
 .toast-body, .popover-body {
-  color: black !important;
+  color: white !important;
+  background-color: #6c757d;
   font-size: 20px;
 }
 
