@@ -27,9 +27,8 @@ export const stringsMatch = (a, b) => {
     return a.toLowerCase() == b.toLowerCase();
 }
 
-export const makeTwitterLink = (text, hashtags, url) => {
+export const makeTwitterLink = (text, hashtags) => {
     text = encodeURI(text);
     hashtags = String(hashtags);
-    url = encodeURI(url);
-    return `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}&url=${url}`;
+    return `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}`;
 }

@@ -205,8 +205,8 @@ export default {
     repTweetURL: function() {
       const id = extractSocialIdFromRep(this.selectedRepresentative, 'twitter');
       if(!id) return null;
-      const text = `@${id} Please consider implementing policies referenced by: https://www.joincampaignzero.org via: `;
-      return makeTwitterLink(text, 'BlackLivesMatter', 'https://www.messageofprotest.com');
+      const text = `@${id} Please consider implementing policies outlined by: joincampaignzero.org (via: messageofprotest.com)`;
+      return makeTwitterLink(text, 'BlackLivesMatter');
     },
   },
   methods: {
