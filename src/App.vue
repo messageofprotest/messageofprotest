@@ -85,7 +85,8 @@
         <br />Header image sourced from
         <a href="https://unsplash.com/@koshuuu" target="_blank">Koshu Kunii via Unsplash.</a>
         <br />Email details sourced from
-        <a href="https://www.joincampaignzero.org" target="_blank">Campaign Zero.</a>
+        <a href="https://www.joincampaignzero.org" target="_blank">Campaign Zero.</a> <br> 
+        For feedback or questions, contact <a href="mailto:messageofprotest@gmail.com?subject=feedback">this email. </a>
       </h5>
       <b-button
         href="https://www.joincampaignzero.org/"
