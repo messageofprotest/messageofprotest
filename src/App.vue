@@ -26,7 +26,6 @@
                       placeholder="Enter zipcode"
                       variant="dark"
                       autocomplete="postal-code"
-                      @input="autosubmitZip"
                     ></b-form-input>
                     <b-spinner class="zipcode-spinner" v-if="loading" label="Loading..."></b-spinner>
                   </div>
@@ -116,21 +115,28 @@
       </template>
       <template v-slot:default>
         <div id="email-tip">
-          <span class="icon"><v-icon name="regular/lightbulb" scale="1.2"/></span> Tip: Customize this template email to get around inbox filters!
+          <span class="icon"><v-icon name="regular/lightbulb" scale="1.2"/></span> Tip: Customize this template email to increase visibility from your representative
         </div>
         <div id="email-body">
           To whom it may concern, <br> <br>
-          I am a concerned representative in your district writing today to voice my support and encouragement for the continued improvement of policing in our jurisdiction. Over 1000 people are killed by police violence each year in America and we can effectively reduce this violence by implementing research-based policy solutions. 
+          I am a concerned representative in your district writing today to voice my support and encouragement for the continued improvement of policing in our jurisdiction. I was shocked to see the brutal murder of George Floyd, and want to prevent such tragedies from occurring in the future. Over 1000 people are killed by police violence each year in America, and we can effectively reduce this violence by implementing research-based policy solutions.
           <br> <br> 
           These policies include: <br> 
-          - Increasing the use of Body Worn Cameras (BWCs) <br>
           - Increasing (or introducing) de-escalation training for police officers <br>
-          - Ending broken windows & for profit policing <br>
-          - Limiting the use of force used by police officers <br> <br> 
-          Campaign Zero maintains an agenda of recommended policy based on research found here: (<a href="https://tinyurl.com/C0-Agenda">https://tinyurl.com/C0-Agenda</a>) <br> <br> 
-          As a taxpayer, I whole-heartedly support strengthening or introducing these policies in our jurisdiction. It’s clear that in the near future these sorts of training, as well as the use of BWCs will be the standard for all jurisdictions in our country. I hope our jurisdiction can lead out in determining best practices and policies for the safety of all in our community. 
+          Currently, police officers only spend 8 hours on conflict de-escalation training, and this has been shown to reduce use of force. After introducing de-escalation training, the Dallas Police Department saw an 18% drop in use of force. <br> <br> 
+          - Increasing the use of Body Worn Cameras (BWCs) <br>
+          Introducing BWC’s also helps reduce force and helps increase accountability. Nearly every case where a police officer was charged with a crime for killing a civilian in 2015 relied on video evidence showing the officer's actions. <br> <br> 
+          - Reduce the size of the police force  <br>
+          Reducing the size of the police department and reinvesting that budget can help increase budgets for additional support systems for communities such as social workers, emergency medical technicians, conflict resolution specialists, restorative justice teams, and other community-based professionals. <br> <br> 
+          - Limiting the use of force used by police officers <br> 
+          Adding policies around the restricting the use of force by police officers has been shown to significantly reduce killings in those departments. Introducing these policies has been shown to reduce killings by up to 72%. <br> <br> 
+          As a taxpayer, I whole-heartedly support strengthening or introducing these policies in our jurisdiction. It’s clear that in the near future these sorts of training, as well as the use of BWCs, will be the standard for all jurisdictions in our country. I hope our jurisdiction can lead in determining best practices and policies for the safety of all in our community.
           <br> <br> 
-          Thank you in advance for your time and have a good day!
+          Thank you for your time and consideration! <br> <br> <br> 
+          Sources: <br>
+          - <a href="http://fivethirtyeight.com/features/a-chicago-cop-is-the-latest-to-be-charged-using-video-evidence/">http://fivethirtyeight.com/features/a-chicago-cop-is-the-latest-to-be-charged-using-video-evidence/</a> <br>
+          - <a href="https://www.joincampaignzero.org ">Campaign Zero </a> <br>
+          - <a href="http://govred.com/blog/deescalation-training-state-requirements/">http://govred.com/blog/deescalation-training-state-requirements/</a>
         </div>
       </template>
       <template v-slot:modal-footer>
