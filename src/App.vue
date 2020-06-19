@@ -3,7 +3,7 @@
     <div class="header">
       <b-container class="header-container">
         <!-- Headers -->
-        <h1>Every voice can help prevent police violence in America</h1>
+        <h1>Every voice can help oppose police violence in America</h1>
         <p
           class="subtitle"
         >Contact your representatives and demand evidence-based change for police reform</p>
