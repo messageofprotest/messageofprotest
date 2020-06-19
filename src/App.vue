@@ -3,7 +3,7 @@
     <div class="header">
       <b-container class="header-container">
         <!-- Headers -->
-        <h1>Together we can end police violence in America</h1>
+        <h1>Every voice can help prevent police violence in America</h1>
         <p
           class="subtitle"
         >Contact your representatives and demand evidence-based change for police reform</p>
@@ -205,7 +205,7 @@ export default {
     repTweetURL: function() {
       const id = extractSocialIdFromRep(this.selectedRepresentative, 'twitter');
       if(!id) return null;
-      const text = `@${id} lorem ipsum`;
+      const text = `@${id} Please consider implementing policies referenced by: https://www.joincampaignzero.org via: `;
       return makeTwitterLink(text, 'BlackLivesMatter', 'https://www.messageofprotest.com');
     },
   },
