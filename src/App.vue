@@ -151,7 +151,7 @@
             <b-icon icon="envelope"></b-icon> Email
           </b-button>
           <b-button
-            v-bind:href="'tel:+' + selectedRepresentative.phones"
+            v-bind:href="'tel:+1' + selectedRepresentative.phones"
             v-if="selectedRepresentative.phones"
             @click="firePhoneGAEvent"
             class="modal-button"
@@ -168,7 +168,7 @@
             <content-copy-icon></content-copy-icon>
           </b-button>
 
-          <b-button class="modal-button" :href="repTweetURL" v-if="repTweetURL" target="_blank">
+          <b-button class="modal-button" :href="repTweetURL" v-if="repTweetURL" @click="tweetClicked" target="_blank">
             <v-icon name="brands/twitter" scale="1.2"/>
           </b-button>
         </div>
@@ -265,6 +265,9 @@ export default {
     },
     C0ButtonClicked: function() {
       this.$ga.event("C0", "click", "user clicked Campaign Zero link");
+    },
+    tweetClicked: function() {
+      this.$ga.event("tweet", "click", "user tweeted representative");
     },
     makeToast: function() {
       this.$bvToast.toast('Email text copied to clipboard.', {
