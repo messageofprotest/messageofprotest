@@ -14,6 +14,7 @@ import 'vue-awesome/icons/brands/github';
 import Icon from 'vue-awesome/components/Icon';
 import CloseIcon from 'vue-material-design-icons/Close.vue';
 import ContentCopyIcon from 'vue-material-design-icons/ContentCopy.vue';
+import { isDevelopmentMode } from './utils';
 
 
 Vue.component('close-icon', CloseIcon);
@@ -30,7 +31,11 @@ Vue.use(BootstrapVueIcons);
 Vue.config.productionTip = false;
 
 Vue.use(VueAnalytics, {
-  id: 'UA-169344376-1'
+  id: 'UA-169344376-1',
+  debug: {
+    // only talk to Google Analystics in production
+    sendHitTask: !isDevelopmentMode
+  }
 });
 
 // support lodash functions in all components

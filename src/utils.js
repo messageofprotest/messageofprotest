@@ -32,3 +32,9 @@ export const makeTwitterLink = (text, hashtags) => {
     hashtags = String(hashtags);
     return `https://twitter.com/intent/tweet?text=${text}&hashtags=${hashtags}`;
 }
+
+export const isDevelopmentMode = window.webpackHotUpdate;
+
+export const runIfProduction = func => {
+    if(!isDevelopmentMode) func();
+}

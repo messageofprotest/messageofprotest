@@ -270,14 +270,6 @@ export default {
     tweetClicked: function() {
       this.$ga.event("tweet", "click", "user tweeted representative");
     },
-    makeToast: function() {
-      this.$bvToast.toast('Email text copied to clipboard.', {
-        variant: 'success',
-        'no-close-button': true,
-        solid: true,
-      })
-    }
-
   },
   data: () => ({
     zipcode: "",
