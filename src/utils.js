@@ -38,3 +38,5 @@ export const isDevelopmentMode = window.webpackHotUpdate;
 export const runIfProduction = func => {
     if(!isDevelopmentMode) func();
 }
+
+export const GA_ID = 'UA-169344376-1';

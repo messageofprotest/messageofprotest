@@ -204,6 +204,9 @@ import { extractSocialIdFromRep, makeTwitterLink } from './utils';
 
 export default {
   name: "App",
+  created() {
+    this.handleGoogleAnalyticsStartup();
+  },
   mounted() {
     // focus input on page load, helpful for usability and screenreaders
     this.$refs.zipcode.$el.focus();
@@ -257,6 +260,27 @@ export default {
       window.getSelection().addRange(range); // to select text
       document.execCommand("copy");
       window.getSelection().removeAllRanges(); // to deselect
+    },
+    /// TODO: most of this logic should be moved into the utils.js
+    handleGoogleAnalyticsStartup: function() {
+      const enable = this.$route.query.enable_google_analytics;
+      const basePath = `${window.location.origin}/#/?enable_google_analytics`;
+      if(enable === 'true') {
+        this.$bvToast.toast(`To disable, go to ${basePath}=false`, { title: `Google Analystics Enabled` });
+        // add 1 second delay, weird bugs, enabling gets overrided by vue-analytics instantiation
+        setTimeout(() => this.$ga.enable(), 1000);
+        console.log("set the disabler to false");
+        this.$cookies.set('enable_google_analytics', 'true');
+      }
+      else if(enable === 'false') {
+        // add 1 second delay, weird bugs, enabling gets overrided by vue-analytics instantiation
+        setTimeout(() => this.$ga.disable(), 1000);
+        console.log("set the disabler to true");
+        this.$cookies.set('enable_google_analytics', 'false');
+      }
+      if(this.$cookies.get('enable_google_analytics') == 'false') {
+        this.$bvToast.toast(`To re-enable, go to ${basePath}=true`, { title: `Google Analystics Disabled` });
+      }
     },
     fireEmailGAEvent: function() {
       this.$ga.event("email", "click", "user emailed representative");
@@ -588,14 +612,9 @@ hr {
   border-width: 0.2rem;
 }
 
-.toast-header {
-  display: none;
-}
-
 .toast-body, .popover-body {
   color: white !important;
   background-color: #6c757d;
-  font-size: 20px;
 }
 
 // hide up/down arrows on numbered inputs
