@@ -444,7 +444,7 @@ h2 {
   .modal-dialog,
   .modal-content {
     /* 85% of window height */
-    height: 85%;
+    height: 100%;
   }
 
   .modal-body {
