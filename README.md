@@ -8,7 +8,7 @@ To disable, navigate here: https://messageofprotest.com/#/?enable_google_analyti
 
 It will stay disabled, and as long is it is disabled you will be notified.
 
-To re-enable: https://messageofprotest.com/#/?enable_google_analytics=false
+To re-enable: https://messageofprotest.com/#/?enable_google_analytics=true
 
 ## Project setup
 ```
