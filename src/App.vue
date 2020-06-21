@@ -246,6 +246,7 @@ export default {
       this.loading = false;
     },
     clickedContact: function(rep) {
+      this.$ga.event("select", "click", "selected a representative from the list");
       this.selectedRepresentative = rep;
     },
     copyToClipboard: function() {
