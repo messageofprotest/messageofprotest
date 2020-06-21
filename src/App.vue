@@ -54,7 +54,8 @@
       <h2 class="section-header" id="reps-header">Representatives</h2>
       <div v-for="rep in representatives" :key="rep.name">
         <b-row align-h="center">
-          <b-col cols="12" sm="10" md="8" lg="6" class="rep-container" v-b-modal.contact-modal @click="clickedContact(rep)" tabindex="false">
+          <b-col cols="12" sm="10" md="8" lg="6" class="rep-container" v-b-modal.contact-modal
+                 @click="clickedContact(rep)" tabindex="false">
             <b-row align-v="center">
               <b-col cols="12" sm="6">
                 <h4 class="rep-name">{{ rep.name }}</h4>
@@ -110,7 +111,7 @@
     </div>
 
     <!-- Contact Modal -->
-    <b-modal id="contact-modal" scrollable size="lg" centered>
+    <b-modal id="contact-modal" @hide="handleContactModalHide" scrollable size="lg" centered>
       <template v-slot:modal-title>
         Contact {{ selectedRepresentative.name }}
       </template>
@@ -267,7 +268,7 @@ export default {
       const enable = this.$route.query.enable_google_analytics;
       const basePath = `${window.location.origin}/#/?enable_google_analytics`;
       if(enable === 'true') {
-        this.$bvToast.toast(`To disable, go to ${basePath}=false`, { title: `Google Analystics Enabled` });
+        this.$bvToast.toast(`To disable, go to ${basePath}=false`, { title: `Google Analytics Enabled` });
         // add 1 second delay, weird bugs, enabling gets overrided by vue-analytics instantiation
         setTimeout(() => this.$ga.enable(), 1000);
         console.log("set the disabler to false");
@@ -280,8 +281,11 @@ export default {
         this.$cookies.set('enable_google_analytics', 'false');
       }
       if(this.$cookies.get('enable_google_analytics') == 'false') {
-        this.$bvToast.toast(`To re-enable, go to ${basePath}=true`, { title: `Google Analystics Disabled` });
+        this.$bvToast.toast(`To re-enable, go to ${basePath}=true`, { title: `Google Analytics Disabled` });
       }
+    },
+    handleContactModalHide: function() {
+      this.$ga.event("contact modal hide", "click", "user clicked out of contact modal");
     },
     fireEmailGAEvent: function() {
       this.$ga.event("email", "click", "user emailed representative");
