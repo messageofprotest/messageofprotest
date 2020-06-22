@@ -207,6 +207,9 @@ export default {
   name: "App",
   created() {
     this.handleGoogleAnalyticsStartup();
+    if(window.location.pathname === '/staging/') {
+      this.$bvToast.toast(`Google Analytics is disabled on staging.`, { title: `On STAGING Site` });
+    }
   },
   mounted() {
     // focus input on page load, helpful for usability and screenreaders
