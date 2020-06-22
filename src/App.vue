@@ -144,7 +144,7 @@
       <template v-slot:modal-footer>
         <div class="button-list">
           <b-button
-            v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + emailBody"
+            v-bind:href="'mailto:' + selectedRepresentative.emails[0] + '?subject=' + emailSubject + '&body=' + processedEmailBody"
             v-if="selectedRepresentative.emails"
             type="submit"
             @click="fireEmailGAEvent"
@@ -199,9 +199,9 @@
 
 <script>
 import { getRepresentatives } from "./endpoints";
-import emailTemplate from "./assets/email_template.json";
+import { emailSubject, emailBody } from './assets/email_template';
 import VueScrollTo from "vue-scrollto";
-import { extractSocialIdFromRep, makeTwitterLink } from './utils';
+import { extractSocialIdFromRep, makeTwitterLink, isAndroid, isSamsung } from './utils';
 
 export default {
   name: "App",
@@ -218,6 +218,13 @@ export default {
       if(!id) return null;
       const text = `@${id} Please consider implementing policies outlined by: joincampaignzero.org (via: messageofprotest.com)`;
       return makeTwitterLink(text, 'BlackLivesMatter');
+    },
+    processedEmailBody: function() {
+      let encoded = encodeURIComponent(emailBody);
+      // on all android devices except Samsung, default email client is Gmail, which uses '<br>' in
+      // mailto links for newlines instead of the standard '%0A'.  
+      if(isAndroid && !isSamsung) return encoded.replace(/%0A/g, '<br>');
+      return encoded;
     },
   },
   methods: {
@@ -305,9 +312,8 @@ export default {
     zipcodeHasError: false,
     representatives: {},
     selectedRepresentative: { name: "Placeholder", emails: [], phones: [] },
-    emailSubject: emailTemplate.subject,
-    emailBody: emailTemplate.content,
-    copyBody: decodeURIComponent(emailTemplate.content),
+    emailSubject: encodeURIComponent(emailSubject),
+    copyBody: emailSubject,
     loading: false
   })
 };

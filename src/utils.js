@@ -40,3 +40,6 @@ export const runIfProduction = func => {
 }
 
 export const GA_ID = 'UA-169344376-1';
+
+export const isAndroid = /android/i.test(navigator.userAgent);
+export const isSamsung = /samsung/i.test(navigator.userAgent) || /sm-/i.test(navigator.userAgent);
