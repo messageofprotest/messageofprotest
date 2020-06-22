@@ -279,13 +279,13 @@ export default {
         // add 1 second delay, weird bugs, enabling gets overrided by vue-analytics instantiation
         setTimeout(() => this.$ga.enable(), 1000);
         console.log("set the disabler to false");
-        this.$cookies.set('enable_google_analytics', 'true');
+        this.$cookies.set('enable_google_analytics', 'true', Infinity);
       }
       else if(enable === 'false') {
         // add 1 second delay, weird bugs, enabling gets overrided by vue-analytics instantiation
         setTimeout(() => this.$ga.disable(), 1000);
         console.log("set the disabler to true");
-        this.$cookies.set('enable_google_analytics', 'false');
+        this.$cookies.set('enable_google_analytics', 'false', Infinity);
       }
       if(this.$cookies.get('enable_google_analytics') == 'false') {
         this.$bvToast.toast(`To re-enable, go to ${basePath}=true`, { title: `Google Analytics Disabled` });

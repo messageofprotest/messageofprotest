@@ -22,8 +22,8 @@ As a taxpayer, I whole-heartedly support strengthening or introducing these poli
 
 Thank you for your time and consideration!
 
-Sources%3A 
-http%3A%2F%2Ffivethirtyeight.com%2Ffeatures%2Fa-chicago-cop-is-the-latest-to-be-charged-using-video-evidence%2F
-https%3A%2F%2Fwww.joincampaignzero.org 
-http%3A%2F%2Fgovred.com%2Fblog%2Fdeescalation-training-state-requirements%2F 
+Sources
+- http://fivethirtyeight.com/features/a-chicago-cop-is-the-latest-to-be-charged-using-video-evidence/
+- https://www.joincampaignzero.org 
+- http://govred.com/blog/deescalation-training-state-requirements/ 
 `;
