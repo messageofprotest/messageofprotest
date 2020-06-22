@@ -1,4 +1,6 @@
 name: Build and Deploy Staging
+env:
+  SERVER: staging
 on:
   push:
     branches:
