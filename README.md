@@ -8,7 +8,6 @@ We're looking for help.  Please reach out if you'd like to get involved!  messag
 Some specific people we'd love to have:
 * coders
 * designers
-* people good with google analytics, optimizely, split testing, etc...
 * activists
 * marketers
 
@@ -33,6 +32,14 @@ To disable, navigate here: https://messageofprotest.com/#/?enable_google_analyti
 It will stay disabled, and as long is it is disabled you will be notified.
 
 To re-enable: https://messageofprotest.com/#/?enable_google_analytics=true
+
+### Our CI Pipeline
+
+We use Github Actions for continuous integration.
+
+On push to `master` branch, the changes will be deployed and live within a few minutes at www.messageofprotest.com
+
+On push to `staging` branch, the staging deploy will be live at www.messageofprotest.com/staging/
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
