@@ -1,0 +1,114 @@
+@import "bootstrap";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Source+Sans+Pro:wght@300&display=swap");
+
+* {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+button,
+div,
+a {
+  border-radius: 0 !important;
+}
+
+a {
+  text-decoration: underline;
+  color: inherit;
+  transition-duration: 0.4s;
+}
+
+a:hover { 
+  color: #fce21b; 
+}
+
+.btn {
+  text-decoration: none;
+  transition-duration: 0.4s;
+}
+
+.btn:hover {
+  background-color: #fce21b;
+  border-color: #fce21b;
+  
+}
+
+body {
+  background-color: #121212;
+  color: white;
+}
+
+h1 {
+  font-size: 3rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-family: "Montserrat", sans-serif;
+}
+
+@include media-breakpoint-down(xs) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+.icon {
+  position: relative;
+  bottom: 2px;
+  padding-right: 4px;
+}
+
+hr {
+  height: 2px;
+  background-color: white;
+  margin-top: 20px;
+}
+
+.modal-content {
+  color: black;
+  border: none;
+
+  .modal-body {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .modal-footer {
+    justify-content: left;
+  }
+}
+
+.toast-body, .popover-body {
+  color: white !important;
+  background-color: #6c757d;
+}
+
+// hide up/down arrows on numbered inputs
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+}
