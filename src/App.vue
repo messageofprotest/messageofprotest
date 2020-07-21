@@ -50,10 +50,10 @@
     </div>
 
     <!-- Where reps pulled from google civics api will show -->
-    <b-container class="section rep-section" id="reps-header" v-if="!_.isEmpty(this.representatives)">
+    <b-container class="section rep-section" v-if="!_.isEmpty(this.representatives)">
       <div v-for="officeLevel in Object.keys(representatives)" :key="officeLevel">
         <div v-if="!_.isEmpty(representatives[officeLevel])">
-          <h2 class="section-header">{{ officeLevel }} Representatives</h2>
+          <h2 class="section-header rep-header">{{ officeLevel }} Representatives</h2>
           <div v-for="rep of representatives[officeLevel]" :key="rep.name">
             <b-row align-h="center">
               <b-col cols="12" sm="10" md="8" lg="6" class="rep-container" v-b-modal.contact-modal
@@ -165,7 +165,7 @@ export default {
         this.zipcodeHasError = false;
         // once reps render (on next DOM cycle) scroll user to them
         this.$nextTick(function() {
-          VueScrollTo.scrollTo("#reps-header");
+          VueScrollTo.scrollTo(".rep-header");
         });
       } catch {
         this.representatives = {};
