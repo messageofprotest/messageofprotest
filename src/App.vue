@@ -50,30 +50,34 @@
     </div>
 
     <!-- Where reps pulled from google civics api will show -->
-    <b-container class="section rep-section" v-if="!_.isEmpty(this.representatives)">
-      <h2 class="section-header" id="reps-header">Representatives</h2>
-      <div v-for="rep in representatives" :key="rep.name">
-        <b-row align-h="center">
-          <b-col cols="12" sm="10" md="8" lg="6" class="rep-container" v-b-modal.contact-modal
-                 @click="clickedContact(rep)" tabindex="false">
-            <b-row align-v="center">
-              <b-col cols="12" sm="6">
-                <h4 class="rep-name">{{ rep.name }}</h4>
-                <h5>{{ rep.officeName }}</h5>
-                <h6>{{ rep.emails ? rep.emails[0] : null }}</h6>
-              </b-col>
-              <b-col cols="0" sm="1"></b-col>
-              <b-col cols="12" sm="5">
-                <b-button
-                  class="contact-button"
-                  v-b-modal.contact-modal
-                  variant="light"
-                  @click="clickedContact(rep)"
-                >Contact</b-button>
+    <b-container class="section rep-section" id="reps-header" v-if="!_.isEmpty(this.representatives)">
+      <div v-for="officeLevel in Object.keys(representatives)" :key="officeLevel">
+        <div v-if="!_.isEmpty(representatives[officeLevel])">
+          <h2 class="section-header">{{ officeLevel }} Representatives</h2>
+          <div v-for="rep of representatives[officeLevel]" :key="rep.name">
+            <b-row align-h="center">
+              <b-col cols="12" sm="10" md="8" lg="6" class="rep-container" v-b-modal.contact-modal
+                    @click="clickedContact(rep)" tabindex="false">
+                <b-row align-v="center">
+                  <b-col cols="12" sm="6">
+                    <h4 class="rep-name">{{ rep.name }}</h4>
+                    <h5>{{ rep.officeName }}</h5>
+                    <h6>{{ rep.emails ? rep.emails[0] : null }}</h6>
+                  </b-col>
+                  <b-col cols="0" sm="1"></b-col>
+                  <b-col cols="12" sm="5">
+                    <b-button
+                      class="contact-button"
+                      v-b-modal.contact-modal
+                      variant="light"
+                      @click="clickedContact(rep)"
+                    >Contact</b-button>
+                  </b-col>
+                </b-row>
               </b-col>
             </b-row>
-          </b-col>
-        </b-row>
+          </div>
+        </div>
       </div>
     </b-container>
 
