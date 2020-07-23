@@ -53,7 +53,7 @@
     <b-container class="section rep-section" v-if="!_.isEmpty(this.representatives)">
       <div v-for="officeLevel in Object.keys(representatives)" :key="officeLevel">
         <div v-if="!_.isEmpty(representatives[officeLevel])">
-          <h2 class="section-header rep-header">{{ officeLevel }} Representatives</h2>
+          <h2 class="rep-header">{{ officeLevel }} Representatives</h2>
           <div v-for="rep of representatives[officeLevel]" :key="rep.name">
             <b-row align-h="center">
               <b-col cols="12" sm="10" md="8" lg="6" class="rep-container" v-b-modal.contact-modal
@@ -304,6 +304,10 @@ export default {
   }
 }
 
+.rep-header {
+  margin: 20px 0px;
+}
+
 .rep-name {
   font-weight: 600;
 }
@@ -318,6 +322,7 @@ export default {
 
 .section-header {
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .subtitle {
